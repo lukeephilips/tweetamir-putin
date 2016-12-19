@@ -1,0 +1,40 @@
+<h3>Enter a twitter user name to retrieve tweets</h3>
+
+<form class="form-control" action="/" method="post">
+  <label for="user_name">Enter user name</label>
+  <input type="text" name="user_name" class="form-control">
+
+  <label>Browser Select</label>
+  <select class="browser-default">
+    <option value="" disabled selected>Choose your option</option>
+    <option value="spanish">Spanish</option>
+    <option value="english">English</option>
+    <option value="russian">Russian</option>
+  </select>
+  <br>
+  <button class="btn" type="submit">Submit</button>
+</form>
+
+
+<div class="row">
+  <div class="col s6">
+    <% if @tweets.any? %>
+        <h3>Tweets</h3><hr>
+        <% @tweets.each do |tweet| %>
+        <div class="tweets">
+          <p><%= tweet.text %> <p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col s6">
+    <% if @tweets.any? %>
+        <h3>Tweets</h3><hr>
+        <% @tweets.each do |tweet| %>
+        <div class="tweets">
+          <p><%= EasyTranslate.translate(tweet.text, :to => :spanish) %> <p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
