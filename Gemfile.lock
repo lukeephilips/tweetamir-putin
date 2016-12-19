@@ -29,6 +29,7 @@ GEM
     diff-lcs (1.2.5)
     domain_name (0.5.20161129)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.0.1)
     easy_translate (0.5.0)
       json
       thread
@@ -129,6 +130,7 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
+  dotenv
   easy_translate
   launchy
   pg

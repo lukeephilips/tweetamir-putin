@@ -1,11 +1,12 @@
 require('twitter')
-require('.env')
+require('dotenv')
+Dotenv.load
 
   config = {
-  consumer_key:    twitter_consumer_key,
-  consumer_secret: twitter_consumer_secret,
-  access_token:    twitter_access_token,
-  access_token_secret: twitter_access_token_secret,
+  consumer_key: ENV['TWITTER_CONSUMER_KEY'],
+  consumer_secret: ENV['TWITTER_CONSUMER_SECRET'],
+  access_token: ENV['TWITTER_ACCESS_TOKEN'],
+  access_token_secret: ENV['TWITTER_ACCESS_TOKEN_SECRET'],
   }
 
   $twitter_client = Twitter::REST::Client.new(config)

@@ -6,6 +6,9 @@ require("pg")
 require('./lib/tweet')
 require('./lib/translate')
 require('easy_translate')
+require('dotenv')
+require('pry')
+Dotenv.load
 
 get('/') do
   @tweets = []

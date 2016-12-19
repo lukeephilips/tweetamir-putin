@@ -1,4 +1,3 @@
 require('easy_translate')
-require('.env')
 
-EasyTranslate.api_key = google_api_key
+EasyTranslate.api_key = ENV['GOOGLE_API_KEY']
