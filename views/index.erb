@@ -5,12 +5,23 @@
   <input type="text" name="user_name" class="form-control">
 
   <label>Browser Select</label>
-  <select class="browser-default">
-    <option value="" disabled selected>Choose your option</option>
+  <select name='language' class="browser-default">
     <option value="spanish">Spanish</option>
     <option value="english">English</option>
     <option value="russian">Russian</option>
   </select>
+  <br>
+  <div class="switch">
+    <label>
+      Off
+      <input name="switch" type="checkbox">
+      <span class="lever"></span>
+      On
+    </label>
+  </div>
+  <br>
+  <label for="target_user">Enter target user name</label>
+  <input type="text" name="target_user" class="form-control">
   <br>
   <button class="btn" type="submit">Submit</button>
 </form>
@@ -28,12 +39,17 @@
     <% end %>
   </div>
   <div class="col s6">
-    <% if @tweets.any? %>
+    <% if @translated.any? %>
         <h3>Tweets</h3><hr>
-        <% @tweets.each do |tweet| %>
+        <% @translated.each do |tweet| %>
+        <form action="/tweet" method="post">
+        <input type="hidden" name="tweet" value="<%= tweet %>">
+        <input type="hidden" name="target" value="<%= @target_user %>">
         <div class="tweets">
-          <p><%= EasyTranslate.translate(tweet.text, :to => :spanish) %> <p>
+          <p><%= tweet %> <p>
         </div>
+        <button type="submit" class="btn">Tweet</button>
+      </form>
       <% end %>
     <% end %>
   </div>
