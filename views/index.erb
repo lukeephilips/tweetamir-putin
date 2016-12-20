@@ -1,62 +1,6 @@
-<div class="row">
-  <div class="col s3">
-    <h3>sidebar</h3>
-  </div>
-  <div class="col s9">
-    <h3>Enter a twitter user name to retrieve tweets</h3>
+<center>
+<h3>What do you want Twittamir to do?</h3>
 
-    <form class="form-control" action="/" method="post">
-      <label for="user_name">Enter user name</label>
-      <input type="text" name="user_name" class="form-control">
-
-      <label>Browser Select</label>
-      <select name='language' class="browser-default">
-        <option value="spanish">Spanish</option>
-        <option value="english">English</option>
-        <option value="russian">Russian</option>
-      </select>
-      <br>
-      <div class="switch">
-        <label>
-          Off
-          <input name="switch" type="checkbox">
-          <span class="lever"></span>
-          On
-        </label>
-      </div>
-      <br>
-      <label for="target_user">Enter target user name</label>
-      <input type="text" name="target_user" class="form-control">
-      <br>
-      <button class="btn" type="submit">Submit</button>
-    </form>
-
-    <div class="row">
-      <div class="col s6">
-        <% if @tweets.any? %>
-        <h3>Tweets</h3><hr>
-      <% @tweets.each do |tweet| %>
-      <div class="tweets">
-        <p><%= tweet.text %> <p>
-        </div>
-        <% end %>
-        <% end %>
-      </div>
-      <div class="col s6">
-        <% if @translated.any? %>
-          <h3>Tweets</h3><hr>
-          <% @translated.each do |tweet| %>
-            <form action="/tweet" method="post">
-              <input type="hidden" name="tweet" value="<%= tweet %>">
-              <input type="hidden" name="target" value="<%= @target_user %>">
-              <div class="tweets">
-                <p><%= tweet %> <p>
-              </div>
-              <button type="submit" class="btn">Tweet</button>
-            </form>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+<a class="btn" href="/user_search">search by user</a>
+<a class="btn" href="/keyword_search">search by keyword(s)</a>
+</center>

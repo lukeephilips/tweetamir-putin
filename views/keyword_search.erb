@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col s3">
+    <% if @user_tweets.any? %>
+    <h3>Tweets</h3><hr>
+  <% @user_tweets.each do |tweet| %>
+  <div class="tweets">
+    <p><%= tweet.text %> <p>
+    </div>
+    <% end %>
+    <% end %>
+  </div>
+  <div class="col s9">
+    <h3>Search Twitter by Keyword (username optional)</h3>
+
+    <form class="form-control" action="/keyword_search" method="post">
+      <label for="user_name">Enter search term</label>
+      <input type="text" name="user_name" class="form-control">
+
+      <label>Browser Select</label>
+      <select name='language' class="browser-default">
+        <option value="spanish">Spanish</option>
+        <option value="english">English</option>
+        <option value="russian">Russian</option>
+      </select>
+      <br>
+      <div class="switch">
+        <label>
+          Off
+          <input name="switch" type="checkbox">
+          <span class="lever"></span>
+          On
+        </label>
+      </div>
+      <br>
+      <label for="target_user">Enter target user name</label>
+      <input type="text" name="target_user" class="form-control">
+      <br>
+
+      <br>
+      <button class="btn" type="submit">Submit</button>
+    </form>
+
+    <form class="" action="index.html" method="post">
+      <label for="search_term">Enter a search term</label>
+      <input type="text" name="search_term" class="form-control">
+      <br>
+      <button class="btn" type="submit">Submit</button>
+    </form>
+
+
+    <div class="row">
+      <div class="col s6">
+        <% if @tweets.any? %>
+        <h3>Tweets</h3><hr>
+      <% @tweets.each do |tweet| %>
+      <div class="tweets">
+        <p><%= tweet.text %> <p>
+        </div>
+        <% end %>
+        <% end %>
+      </div>
+      <div class="col s6">
+        <% if @translated.any? %>
+          <h3>Tweets</h3><hr>
+          <% @translated.each do |tweet| %>
+            <form action="/tweet" method="post">
+              <input type="hidden" name="tweet" value="<%= tweet %>">
+              <input type="hidden" name="target" value="<%= @target_user %>">
+              <div class="tweets">
+                <p><%= tweet %> <p>
+              </div>
+              <button type="submit" class="btn">Tweet</button>
+            </form>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
