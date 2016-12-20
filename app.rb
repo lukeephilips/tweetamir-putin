@@ -43,7 +43,7 @@ get('/user_search') do
 end
 
 post('/user_search') do
-  @user_tweets = $twitter_client.home_timeline()
+  @user_tweets = $twitter_client.user_timeline('Twittamir_Putin')
   user_name = params['user_name']
   @translated = []
   language = params['language'].to_sym
@@ -68,7 +68,18 @@ end
 
 post('/keyword_search') do
   @user_tweets = $twitter_client.user_timeline('Twittamir_Putin')
-  @tweets = []
+  search_term = params['search_term']
   @translated = []
+  language = params['language'].to_sym
+  @tweets = $twitter_client.search(search_term, result_type: "recent").take(20).collect
+  @tweets.each() do |tweet|
+    @translated.push(EasyTranslate.translate(tweet.text, :to => language))
+  end
+  if params['switch']
+    @target_user = params['target_user']
+  end
+  # $twitter_client.update(user_name)
+  # @tweets = $twitter_client.search(user_name, result_type: "recent").take(3).collect
+  erb(:user_search)
   erb(:keyword_search)
 end
