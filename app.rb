@@ -2,15 +2,16 @@ require("sinatra")
 require("sinatra/reloader")
 require('sinatra/activerecord')
 also_reload("lib/**/*.rb")
-require("pg")
-require('./lib/tweet')
-require('./lib/translate')
-require('easy_translate')
-require('dotenv')
-require('pry')
 require('./lib/emoji')
 require('./lib/keyword')
 require('./lib/sentence')
+require('./lib/tweet')
+require('./lib/translate')
+require("pg")
+require('easy_translate')
+require('dotenv')
+require('pry')
+# require ("whenever")
 
 
 Dotenv.load
@@ -112,7 +113,9 @@ post '/emoji' do
 end
 
 get '/emoji_tweet' do
-  @emoji_tweet = $twitter_client.update("@#{$twitter_client.mentions.first.user.user_name} #{$twitter_client.mentions.first.text.to_array}")
-
+    @emoji_tweet = "@#{$twitter_client.mentions.first.user.user_name}"+" says "+" #{$twitter_client.mentions.first.text.to_array}"
   erb(:test)
+end
+get 'tweet_back' do
+  $twitter_client.update("@#{$twitter_client.mentions.first.user.user_name} #{$twitter_client.mentions.first.text.to_array}")
 end
