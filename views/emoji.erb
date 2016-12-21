@@ -1,0 +1,10 @@
+<%# encoding: utf-8 %>
+<form action="/emoji" method="post">
+    <input type="text" class="form-control" name='sentence'>
+    <button type="submit" class="btn">Emojify</button>
+</form>
+<div class="output">
+  <% if @return %>
+  <p><%= @return %></p>
+  <% end %>
+</div>

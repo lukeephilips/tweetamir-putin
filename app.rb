@@ -8,6 +8,11 @@ require('./lib/translate')
 require('easy_translate')
 require('dotenv')
 require('pry')
+require('./lib/emoji')
+require('./lib/keyword')
+require('./lib/sentence')
+
+
 Dotenv.load
 
 get('/') do
@@ -82,4 +87,15 @@ post('/keyword_search') do
   # @tweets = $twitter_client.search(user_name, result_type: "recent").take(3).collect
   erb(:user_search)
   erb(:keyword_search)
+end
+
+get '/emoji' do
+  erb(:emoji)
+end
+
+post '/emoji' do
+  sentence = params['sentence']
+  @return = sentence.sentence_to_array(sentence)
+
+  erb(:emoji)
 end
