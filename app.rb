@@ -48,7 +48,6 @@ get('/keyword_search') do
 end
 
 post('/keyword_search') do
-  binding.pry
   @user_tweets = $twitter_client.user_timeline('Twittamir_Putin')
   search_term = params['search-term']
   @translated = []
