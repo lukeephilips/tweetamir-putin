@@ -2,7 +2,7 @@ class String
   def to_array
 
     sentence_array = self.split(" ")
-    remove_list = ['a', 'the', 'an', 'of', 'and', 'if', 'or', 'in', 'where', 'were', 'is', 'it', 'to', 'am']
+    remove_list = ['a', 'the', 'an', 'of', 'if', 'or', 'in', 'where', 'were', 'is', 'it', 'to', 'am', 'are', 'that']
     ignore_list = ['@', '#', 'http']
     emojified_sentence =[]
     sentence_array.each do |word|
