@@ -3,15 +3,6 @@ nav .brand-logo {
   color: #444;
 }
 
-#title {
-  background-image: url('/img/background2.jpg');
-  height: 700px;
-  color: white;
-  padding-top: 30%;
-  padding-left: 45%;
-}
-
-
 .main-body {
   padding-left: 20px;
   padding-right: 20px;
@@ -23,4 +14,16 @@ nav .brand-logo {
 
 .output {
   font-size: 3em;
+}
+
+nav a {
+  color: #2196f3;
+}
+
+.button-collapse {
+  color: #2196f3;
+}
+
+.material-icons {
+  color: #2196f3;
 }
