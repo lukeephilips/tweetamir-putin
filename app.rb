@@ -95,7 +95,7 @@ end
 
 post '/emoji' do
   sentence = params['sentence']
-  @return = sentence.sentence_to_array(sentence)
+  @return = sentence.to_array
 
   erb(:emoji)
 end
