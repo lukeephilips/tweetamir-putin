@@ -1,23 +1,30 @@
 <div class="row">
-  <div class="col s3 z-depth-2 blue-grey lighten-5 sidebar">
+  <div class="col s3 z-depth-2 blue-grey lighten-5 sidebar hide-on-small-only">
     <% if @user_tweets.any? %>
     <h3>All Tweets</h3>
     <p>by <a href="https://twitter.com/Twittamir_Putin">@Twittamir_Putin</a></p>
     <hr>
   <% @user_tweets.each do |tweet| %>
   <div class="tweets">
-    <p><%= tweet.text %> <p>
+    <p><%= tweet.text.add_tags %> <p>
     </div><hr>
     <% end %>
     <% end %>
   </div>
   <div class="col s9">
     <div class="main-body">
-      <h3>Search Twitter by Keyword</h3>
+      <h3>Search Twitter</h3>
       <div class="row">
 
 
       <form class="form-control" action="/keyword_search" method="post">
+<<<<<<< HEAD
+        <div class="col s12">
+          <div class="input-field">
+            <input type="text" name="search-term">
+            <label for="search-term">Enter search term</label>
+          </div>
+=======
         <div class="col s6">
 
         <label for="search_term">Enter search term</label>
@@ -42,32 +49,36 @@
             <span class="lever"></span>
             On
           </label>
+>>>>>>> c0fe1821eb1273173574e97818b4fd111aa9f94e
         </div>
       </div>
-    </div>
-        <br>
-        <button class="btn blue" type="submit">Submit</button>
-      </form>
+      <br>
+      <button class="btn blue" type="submit">Search</button>
+      <br>
+    </form>
+    <br>
 
 
 
       <div class="row">
-        <div class="col s6">
-          <% if @tweets.any? %>
-          <h4>Returned Tweets</h4><hr>
-        <% @tweets.each do |tweet| %>
-
-
-
-
+        <div class="col s12">
+          <% if @translated.any? %>
+          <h4>Returned Tweets:</h4>
+        <% @translated.each do |tweet| %>
 
             <div class="row">
                  <div class="col s12">
-                   <div class="card">
-                     <div class="card-content">
-                       <span class="card-title"><%= tweet.user.name %></span>
-                       <p>@<%= tweet.user.screen_name %></p><hr>
-                       <p><%= tweet.text %></p>
+                   <div class="card-panel grey lighten-3">
+                     <p> <b style="font-size: 20px"><%= tweet[:user_name] %></b> <span class="grey-text"> @<a href="https://twitter.com/<%= tweet[:screen_name]%>" class="grey-text"><%= tweet[:screen_name] %></a> • <%= Time.now - tweet[:created_at]%></span></p><hr>
+                     <p><%= tweet[:text].add_tags %></p>
+                     <p><%= tweet[:russian].add_tags %></p>
+                     <p><%= tweet[:spanish].add_tags %></p>
+                     <p><%= tweet[:japanese].add_tags %></p>
+                     <div class="card-action">
+                       <a href="#!" class="waves-effect waves-circle waves-light btn-floating secondary-content amber">
+                         <i class="material-icons">translate</i>
+                       </a>
+                       <!-- <a href="#" class="btn amber">Translate</a> -->
                      </div>
                    </div>
                  </div>
@@ -79,30 +90,7 @@
 
 
         </div>
-        <div class="col s6">
-          <% if @translated.any? %>
-            <h4>Translated Tweets</h4><hr>
-            <% @translated.each do |tweet| %>
-              <div class="row">
-                   <div class="col s12">
-                     <div class="card">
-                       <div class="card-content">
-                         <span class="card-title"><%= tweet[0] %></span>
-                         <p><%= tweet[1] %></p><hr>
-                         <p><%= tweet[2] %></p>
-                       </div>
-                     </div>
-                   </div>
-                 </div>
 
-
-
-
-
-
-            <% end %>
-          <% end %>
-        </div>
       </div>
     </div>
   </div>
