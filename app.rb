@@ -87,6 +87,9 @@ get '/emoji_tweet' do
     @emoji_tweet = "@#{$twitter_client.mentions.first.user.user_name}"+" says "+" #{$twitter_client.mentions.first.text.to_array}"
   erb(:test)
 end
-get 'tweet_back' do
-  $twitter_client.update("@#{$twitter_client.mentions.first.user.user_name} #{$twitter_client.mentions.first.text.to_array}")
+get '/tweet_back' do
+
+  @tweet_back = $twitter_client.update("@#{$twitter_client.mentions.first.user.user_name} #{$twitter_client.mentions.first.text.to_array}").text
+  @you_tweeted = true
+  erb(:test)
 end
