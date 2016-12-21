@@ -52,7 +52,9 @@ post('/user_search') do
   user_name = params['user_name']
   @translated = []
   language = params['language'].to_sym
+
   @tweets = $twitter_client.user_timeline(user_name)
+
   @tweets.each() do |tweet|
     @translated.push(EasyTranslate.translate(tweet.text, :to => language))
   end
@@ -81,7 +83,13 @@ post('/keyword_search') do
     tweet_text_with_info = []
     tweet_text_with_info.push(tweet.user.name)
     tweet_text_with_info.push(tweet.user.screen_name)
-    tweet_text_with_info.push(EasyTranslate.translate(tweet.text, :to => language))
+    if language == :emojify
+      str = tweet.text
+      emoji_str = str.to_array
+      tweet_text_with_info.push(emoji_str)
+    else
+      tweet_text_with_info.push(EasyTranslate.translate(tweet.text, :to => language))
+    end
     @translated.push(tweet_text_with_info)
   end
   if params['switch']

@@ -3,13 +3,25 @@ class String
 
     sentence_array = self.split(" ")
     remove_list = ['a', 'the', 'an', 'of', 'and', 'if', 'or', 'in', 'where', 'were', 'is', 'it', 'to', 'am']
-    @return =[]
+    ignore_list = ['@', '#', 'http']
+    emojified_sentence =[]
     sentence_array.each do |word|
 
       #if the word is NOT on the remove_list
-      if !remove_list.include?(word)
+      if (!remove_list.include?(word))
         keyword_hash = Keyword.where("LOWER(keyword) LIKE LOWER(?)", "#{word}").first
-        if keyword_hash == nil # if nothing is returned when testing the whole word
+
+        ignore = false
+        ignore_list.each do |item|
+          if word.include?(item)
+            ignore = true
+          end
+        end
+
+        if ignore
+          emojified_sentence.push(word)
+
+        elsif keyword_hash == nil # if nothing is returned when testing the whole word
 
           # run a double loop to push every substring from 0 to word length
           substrings = []
@@ -32,19 +44,19 @@ class String
 
           #sort array so longest words will be replaced first and replace any hits in the original word
           emoji_array.sort! do |x,y|
-            y[0].length <=> x [0].length
+            y[0].length <=> x[0].length
           end
           emoji_array.each do |pair|
             word.gsub!(pair[0], pair[1])
           end
-          @return.push(word)
+          emojified_sentence.push(word)
 
 
         else # if whole word is returned push the image
-          @return.push(Emoji.find(keyword_hash[:emoji_id]).image)
+          emojified_sentence.push(Emoji.find(keyword_hash[:emoji_id]).image)
         end
       end
     end
-    @return.join (" ")
+    emojified_sentence.join (" ")
   end
 end
