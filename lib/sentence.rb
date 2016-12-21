@@ -2,13 +2,13 @@ class String
   def to_array
 
     sentence_array = self.split(" ")
-    remove_list = ['a', 'the', 'an', 'of', 'and', 'if', 'or', 'in', 'where', 'were', 'is', 'it', 'to', 'am']
+    remove_list = ['a', 'the', 'an', 'of', 'and', 'if', 'or', 'in', 'where', 'were', 'is', 'it', 'to', 'am','@Twittamir_Putin']
     ignore_list = ['@', '#', 'http']
     emojified_sentence =[]
     sentence_array.each do |word|
 
       #if the word is NOT on the remove_list
-      if (!remove_list.include?(word))
+      if !remove_list.include?(word)
         keyword_hash = Keyword.where("LOWER(keyword) LIKE LOWER(?)", "#{word}").first
 
         ignore = false

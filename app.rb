@@ -110,3 +110,9 @@ post '/emoji' do
 
   erb(:emoji)
 end
+
+get '/emoji_tweet' do
+  @emoji_tweet = $twitter_client.update("@#{$twitter_client.mentions.first.user.user_name} #{$twitter_client.mentions.first.text.to_array}")
+
+  erb(:test)
+end
