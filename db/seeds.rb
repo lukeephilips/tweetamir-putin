@@ -663,7 +663,7 @@
 {"unicode":"U+1F525","description":"fire","keyword":"flame , tool , fire","emoji":"🔥"},
 {"unicode":"U+1F4A7","description":"droplet","keyword":"cold , comic , drop , sweat , droplet","emoji":"💧"},
 {"unicode":"U+1F30A","description":"water wave","keyword":"ocean , water , wave","emoji":"🌊"},
-{"unicode":"U+1F383","description":"jack-o-lantern","keyword":"celebration , halloween , jack , lantern , jack-o-lantern","emoji":"🎃"},
+{"unicode":"U+1F383","description":"jack-o-lantern","keyword":"celebration , halloween , pumpkin, jack , lantern , jack-o-lantern","emoji":"🎃"},
 {"unicode":"U+1F384","description":"Christmas tree","keyword":"celebration , Christmas , tree","emoji":"🎄"},
 {"unicode":"U+1F386","description":"fireworks","keyword":"celebration , fireworks","emoji":"🎆"},
 {"unicode":"U+1F387","description":"sparkler","keyword":"celebration , fireworks , sparkle , sparkler","emoji":"🎇"},

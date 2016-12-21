@@ -18,11 +18,38 @@
 
 
       <form class="form-control" action="/keyword_search" method="post">
+<<<<<<< HEAD
         <div class="col s12">
           <div class="input-field">
             <input type="text" name="search-term">
             <label for="search-term">Enter search term</label>
           </div>
+=======
+        <div class="col s6">
+
+        <label for="search_term">Enter search term</label>
+        <input type="text" name="search_term" class="form-control">
+
+        <label for="language">Language to translate to:</label>
+        <select name='language' class="browser-default">
+          <option value="spanish">Spanish</option>
+          <option value="english">English</option>
+          <option value="russian">Russian</option>
+          <option value="emojify">Emojify</option>
+        </select>
+      </div>
+        <div class="col s6">
+        <label for="target_user">Enter target user name to add "@username" before tweet</label>
+        <input type="text" name="target_user" class="form-control">
+        <label for="switch">Turn on Target User function:</label>
+        <div class="switch">
+          <label style="font-size: 25px;">
+            Off
+            <input name="switch" type="checkbox">
+            <span class="lever"></span>
+            On
+          </label>
+>>>>>>> c0fe1821eb1273173574e97818b4fd111aa9f94e
         </div>
       </div>
       <br>

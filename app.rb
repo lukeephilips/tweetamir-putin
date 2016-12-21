@@ -2,9 +2,12 @@ require("sinatra")
 require("sinatra/reloader")
 require('sinatra/activerecord')
 also_reload("lib/**/*.rb")
-require("pg")
+require('./lib/emoji')
+require('./lib/keyword')
+require('./lib/sentence')
 require('./lib/tweet')
 require('./lib/translate')
+require("pg")
 require('easy_translate')
 require('dotenv')
 require('pry')
@@ -12,7 +15,6 @@ require('./lib/emoji')
 require('./lib/keyword')
 require('./lib/sentence')
 require('./lib/add_tags')
-
 Dotenv.load
 
 get('/') do
@@ -54,6 +56,7 @@ post('/keyword_search') do
   # language = params['language'].to_sym
   @tweets = $twitter_client.search(search_term, result_type: "recent").take(5).collect
   @tweets.each() do |tweet|
+
     tweet_text_with_info = {:user_name => tweet.user.name, :screen_name => tweet.user.screen_name,
     :created_at => tweet.created_at, :text => tweet.text, #:emoji => tweet.text.to_array,
     :russian => (EasyTranslate.translate(tweet.text, :to => :russian).to_s),
@@ -78,4 +81,12 @@ post '/emoji' do
   @return = sentence.to_array
 
   erb(:emoji)
+end
+
+get '/emoji_tweet' do
+    @emoji_tweet = "@#{$twitter_client.mentions.first.user.user_name}"+" says "+" #{$twitter_client.mentions.first.text.to_array}"
+  erb(:test)
+end
+get 'tweet_back' do
+  $twitter_client.update("@#{$twitter_client.mentions.first.user.user_name} #{$twitter_client.mentions.first.text.to_array}")
 end
