@@ -52,13 +52,13 @@ post('/keyword_search') do
   search_term = params['search-term']
   @translated = []
   # language = params['language'].to_sym
-  @tweets = $twitter_client.search(search_term, result_type: "recent").take(20).collect
+  @tweets = $twitter_client.search(search_term, result_type: "recent").take(5).collect
   @tweets.each() do |tweet|
-    tweet_text_with_info = []
-    tweet_text_with_info.push(tweet.user.name)
-    tweet_text_with_info.push(tweet.user.screen_name)
-    tweet_text_with_info.push(tweet.created_at)
-    tweet_text_with_info.push(EasyTranslate.translate(tweet.text, :to => :spanish))
+    tweet_text_with_info = {:user_name => tweet.user.name, :screen_name => tweet.user.screen_name,
+    :created_at => tweet.created_at, :text => tweet.text, #:emoji => tweet.text.to_array,
+    :russian => (EasyTranslate.translate(tweet.text, :to => :russian).to_s),
+    :spanish => (EasyTranslate.translate(tweet.text, :to => :spanish)),
+    :japanese => (EasyTranslate.translate(tweet.text, :to => :japanese))}
     @translated.push(tweet_text_with_info)
   end
   if params['switch']

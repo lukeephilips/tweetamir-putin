@@ -1,12 +1,12 @@
 <div class="row">
-  <div class="col s3 z-depth-2 blue-grey lighten-5 sidebar">
+  <div class="col s3 z-depth-2 blue-grey lighten-5 sidebar hide-on-small-only">
     <% if @user_tweets.any? %>
     <h3>All Tweets</h3>
     <p>by <a href="https://twitter.com/Twittamir_Putin">@Twittamir_Putin</a></p>
     <hr>
   <% @user_tweets.each do |tweet| %>
   <div class="tweets">
-    <p><%= tweet.text %> <p>
+    <p><%= tweet.text.add_tags %> <p>
     </div><hr>
     <% end %>
     <% end %>
@@ -31,43 +31,22 @@
     </form>
     <br>
 
-        <!-- <label for="language">Language to translate to:</label>
-        <select name='language' class="browser-default">
-          <option value="spanish">Spanish</option>
-          <option value="english">English</option>
-          <option value="russian">Russian</option>
-        </select>
-        <div class="col s6">
-        <label for="target_user">Enter target user name to add "@username" before tweet</label>
-        <input type="text" name="target_user" class="form-control">
-        <label for="switch">Turn on Target User function:</label>
-        <div class="switch">
-          <label style="font-size: 25px;">
-            Off
-            <input name="switch" type="checkbox">
-            <span class="lever"></span>
-            On
-          </label>
-        </div>
-      </div> -->
-
 
 
       <div class="row">
         <div class="col s12">
-          <% if @tweets.any? %>
+          <% if @translated.any? %>
           <h4>Returned Tweets:</h4>
-        <% @tweets.each do |tweet| %>
-
-
-
-
+        <% @translated.each do |tweet| %>
 
             <div class="row">
                  <div class="col s12">
                    <div class="card-panel grey lighten-3">
-                     <p> <b style="font-size: 20px"><%= tweet.user.name %></b> <span class="grey-text"> @<a href="https://twitter.com/<%= tweet.user.screen_name %>" class="grey-text"><%= tweet.user.screen_name %></a> • <%= Time.now - tweet.created_at%></span></p><hr>
-                     <p><%= tweet.text.add_tags %></p>
+                     <p> <b style="font-size: 20px"><%= tweet[:user_name] %></b> <span class="grey-text"> @<a href="https://twitter.com/<%= tweet[:screen_name]%>" class="grey-text"><%= tweet[:screen_name] %></a> • <%= Time.now - tweet[:created_at]%></span></p><hr>
+                     <p><%= tweet[:text].add_tags %></p>
+                     <p><%= tweet[:russian].add_tags %></p>
+                     <p><%= tweet[:spanish].add_tags %></p>
+                     <p><%= tweet[:japanese].add_tags %></p>
                      <div class="card-action">
                        <a href="#!" class="waves-effect waves-circle waves-light btn-floating secondary-content amber">
                          <i class="material-icons">translate</i>
