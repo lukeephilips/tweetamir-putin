@@ -11,7 +11,7 @@ require('pry')
 require('./lib/emoji')
 require('./lib/keyword')
 require('./lib/sentence')
-
+require('./lib/add_tags')
 
 Dotenv.load
 
@@ -48,6 +48,7 @@ get('/keyword_search') do
 end
 
 post('/keyword_search') do
+  binding.pry
   @user_tweets = $twitter_client.user_timeline('Twittamir_Putin')
   search_term = params['search-term']
   @translated = []
