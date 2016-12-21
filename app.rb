@@ -78,14 +78,17 @@ post('/keyword_search') do
   language = params['language'].to_sym
   @tweets = $twitter_client.search(search_term, result_type: "recent").take(20).collect
   @tweets.each() do |tweet|
-    @translated.push(EasyTranslate.translate(tweet.text, :to => language))
+    tweet_text_with_info = []
+    tweet_text_with_info.push(tweet.user.name)
+    tweet_text_with_info.push(tweet.user.screen_name)
+    tweet_text_with_info.push(EasyTranslate.translate(tweet.text, :to => language))
+    @translated.push(tweet_text_with_info)
   end
   if params['switch']
     @target_user = params['target_user']
   end
   # $twitter_client.update(user_name)
   # @tweets = $twitter_client.search(user_name, result_type: "recent").take(3).collect
-  erb(:user_search)
   erb(:keyword_search)
 end
 

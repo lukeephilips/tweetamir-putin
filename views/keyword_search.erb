@@ -2,12 +2,12 @@
   <div class="col s3 z-depth-2 blue-grey lighten-5 sidebar">
     <% if @user_tweets.any? %>
     <h3>All Tweets</h3>
-    <h5>by <a href="https://twitter.com/Twittamir_Putin">@Twittamir_Putin</a></h5>
+    <p>by <a href="https://twitter.com/Twittamir_Putin">@Twittamir_Putin</a></p>
     <hr>
   <% @user_tweets.each do |tweet| %>
   <div class="tweets">
     <p><%= tweet.text %> <p>
-    </div>
+    </div><hr>
     <% end %>
     <% end %>
   </div>
@@ -45,7 +45,7 @@
       </div>
     </div>
         <br>
-        <button class="btn" type="submit">Submit</button>
+        <button class="btn blue" type="submit">Submit</button>
       </form>
 
 
@@ -58,23 +58,16 @@
 
 
 
-        <!-- <div class="tweets">
-          <p><%= tweet.text %> <p>
-          </div> -->
 
 
-
-          <div class="row">
+            <div class="row">
                  <div class="col s12">
-                   <div class="card blue-grey darken-1">
-                     <div class="card-content white-text">
-                       <span class="card-title"><%= tweet.source %></span>
+                   <div class="card">
+                     <div class="card-content">
+                       <span class="card-title"><%= tweet.user.name %></span>
+                       <p>@<%= tweet.user.screen_name %></p><hr>
                        <p><%= tweet.text %></p>
                      </div>
-                     <!-- <div class="card-action">
-                       <a href="#">This is a link</a>
-                       <a href="#">This is a link</a>
-                     </div> -->
                    </div>
                  </div>
                </div>
@@ -89,14 +82,23 @@
           <% if @translated.any? %>
             <h4>Translated Tweets</h4><hr>
             <% @translated.each do |tweet| %>
-              <form action="/tweet" method="post">
-                <input type="hidden" name="tweet" value="<%= tweet %>">
-                <input type="hidden" name="target" value="<%= @target_user %>">
-                <div class="tweets">
-                  <p><%= tweet %> <p>
-                </div>
-                <button type="submit" class="btn">Tweet</button>
-              </form>
+              <div class="row">
+                   <div class="col s12">
+                     <div class="card">
+                       <div class="card-content">
+                         <span class="card-title"><%= tweet[0] %></span>
+                         <p><%= tweet[1] %></p><hr>
+                         <p><%= tweet[2] %></p>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+
+
+
+
+
+
             <% end %>
           <% end %>
         </div>
