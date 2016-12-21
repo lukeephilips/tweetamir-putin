@@ -45,6 +45,7 @@
                    <div class="card-panel grey lighten-3">
                      <p> <b style="font-size: 20px"><%= tweet[:user_name] %></b> <span class="grey-text"> @<a href="https://twitter.com/<%= tweet[:screen_name]%>" class="grey-text"><%= tweet[:screen_name] %></a> • <%= Time.now - tweet[:created_at]%></span></p><hr>
                      <p><%= tweet[:text].add_tags %></p>
+                     <p><%= tweet[:emoji] %></p>
                      <p><%= tweet[:russian].add_tags %></p>
                      <p><%= tweet[:spanish].add_tags %></p>
                      <p><%= tweet[:japanese].add_tags %></p>
