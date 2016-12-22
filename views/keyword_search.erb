@@ -16,12 +16,10 @@
       <h3>Search Twitter</h3>
       <div class="row">
 
-
       <form class="form-control" action="/keyword_search" method="post">
-
         <div class="col s12">
           <div class="input-field">
-            <input type="text" name="search-term" placeholder="hashtag yolo">
+            <input type="text" name="search-term" id="search-term" placeholder="e.g. from:kanyewest, #ruby" required>
             <label for="search-term">Enter search term</label>
           </div>
         </div>
@@ -32,31 +30,9 @@
     </form>
     <br>
 
-    <!-- <ul class="collapsible" data-collapsible="accordion">
-        <li>
-          <div class="collapsible-header"><i class="material-icons">filter_drama</i>See Translations</div>
-          <div class="collapsible-body">
-            <p>Lorem ipsum dolor sit amet.</p>
-            <form action="/tweet" method="post">
-              <input type="hidden" name="tweet" value="tweet">
-              <button type="button" name="button" class="btn amber center" style="margin-left: 10px;">retweet</button>
-            </form>
-
-          </div>
-          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        </li>
-      </ul> -->
-
-
-
-
       <div class="row">
         <div class="col s12">
           <% if @translated.any? %>
-
-
-
-
 
           <h4>Returned Tweets:</h4>
         <% @translated.each do |tweet| %>

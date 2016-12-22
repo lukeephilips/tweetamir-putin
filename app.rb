@@ -73,12 +73,19 @@ post('/keyword_search') do
 end
 
 get '/emoji' do
+  @user_tweets = $twitter_client.user_timeline('Twittamir_Putin')
   erb(:emoji)
 end
 
 post '/emoji' do
-  sentence = params['sentence']
-  @return = sentence.to_array
+  @user_tweets = $twitter_client.user_timeline('Twittamir_Putin')
+  tweet = params['sentence']
+
+  @return = {:user_name => $twitter_client.user.name, :screen_name => $twitter_client.user.screen_name,
+  :created_at => Time.now, :text => tweet, :emoji => tweet.to_array,
+  :russian => (EasyTranslate.translate(tweet, :to => :russian)),
+  :spanish => (EasyTranslate.translate(tweet, :to => :spanish)),
+  :japanese => (EasyTranslate.translate(tweet, :to => :japanese))}
 
   erb(:emoji)
 end
