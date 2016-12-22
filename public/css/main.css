@@ -59,3 +59,12 @@ nav a {
  .input-field .prefix.active {
    color: #000;
  }
+
+.progress {
+  display: none;
+}
+
+.collapsible-body p {
+  padding: 10px;
+  margin: 0px;
+}
