@@ -58,7 +58,7 @@ post('/keyword_search') do
   @tweets.each() do |tweet|
 
     tweet_text_with_info = {:user_name => tweet.user.name, :screen_name => tweet.user.screen_name,
-    :created_at => tweet.created_at, :text => tweet.text, #:emoji => tweet.text.to_array,
+    :created_at => tweet.created_at, :text => tweet.text, :emoji => tweet.text.to_array,
     :russian => (EasyTranslate.translate(tweet.text, :to => :russian).to_s),
     :spanish => (EasyTranslate.translate(tweet.text, :to => :spanish)),
     :japanese => (EasyTranslate.translate(tweet.text, :to => :japanese))}
