@@ -30,7 +30,14 @@ nav a {
 
 #search {
   color: #ffffff;
+  font-size: 40px;
 }
+
+#drop-down {
+  color: #ffffff;
+  font-size: 40px;
+}
+
 .page-footer {
   color: white;
 }
@@ -168,4 +175,10 @@ footer.page-footer {
 
 .card-panel {
   margin-bottom: 0px;
+}
+
+.collapsible-header {
+  font-size: 20px;
+  background-color: #ffc107;
+  color: #fff;
 }
