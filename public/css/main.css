@@ -179,3 +179,9 @@ footer.page-footer {
   background-color: #ffc107;
   color: #fff;
 }
+
+[type="checkbox"]:checked + label:before {
+  border-right: 2px solid #ffc107;
+  border-bottom: 2px solid #ffc107;
+
+}

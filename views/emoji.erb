@@ -13,7 +13,7 @@
   </div>
 
 <div class="col m9 s12">
-  <h4>Translate Your Text</h4>
+  <h5>Translate Your Text</h5>
   <form  action="/emoji" method="post">
       <div class="input-field col s12">
         <textarea id="sentence" name="sentence" class="materialize-textarea" maxlength="140" required></textarea>
@@ -27,11 +27,12 @@
 
 
 <div class="content">
+
   <% if @return %>
   <% tweet = @return %>
 
   <div class="row">
-       <div class="col s12">
+       <div class="col s12"><br>
          <div class="card-panel grey lighten-3">
            <p> <b style="font-size: 20px"><%= tweet[:user_name] %></b> <span class="grey-text"> @<a href="https://twitter.com/<%= tweet[:screen_name]%>" class="grey-text"><%= tweet[:screen_name] %></a> • <%= Time.now - tweet[:created_at]%></span></p><hr>
            <p><%= tweet[:text].add_tags %></p>
@@ -44,7 +45,11 @@
                    <p><%= tweet[:emoji] %></p>
                    <form action="/tweet" method="post">
                      <input type="hidden" name="tweet" value=" <%= tweet[:emoji] %>">
-                     <button type="submit" name="button" class="btn amber" style="margin-left: 16px;">tweet as twittamir!</button>
+                     <button type="submit" name="button" class="btn amber" style="margin-left: 10px;">tweet as twittamir!</button>
+                     <p class="right">
+                      <input type="checkbox" id="putin" name="putin"/>
+                      <label for="putin">Tweet to Vladamir Putin</label>
+                    </p>
                    </form>
                  </div>
                  <div class="collapsible-body">
@@ -52,7 +57,11 @@
                    <p><%= tweet[:russian].add_tags %></p>
                    <form action="/tweet" method="post">
                      <input type="hidden" name="tweet" value=" <%= tweet[:russian] %>">
-                     <button type="submit" name="button" class="btn amber center" style="margin-left: 16px;">tweet as twittamir!</button>
+                     <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">tweet as twittamir!</button>
+                     <p class="right">
+                      <input type="checkbox" id="putin"/>
+                      <label for="putin">Tweet to Vladamir Putin</label>
+                     </p>
                    </form>
                  </div>
                  <div class="collapsible-body">
@@ -60,7 +69,11 @@
                    <p><%= tweet[:spanish].add_tags %></p>
                    <form action="/tweet" method="post">
                      <input type="hidden" name="tweet" value=" <%= tweet[:spanish] %>">
-                     <button type="submit" name="button" class="btn amber center" style="margin-left: 16px;">tweet as twittamir!</button>
+                     <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">tweet as twittamir!</button>
+                     <p class="right">
+                      <input type="checkbox" id="putin"/>
+                      <label for="putin">Tweet to Vladamir Putin</label>
+                     </p>
                    </form>
                  </div>
                  <div class="collapsible-body">
@@ -68,18 +81,17 @@
                    <p><%= tweet[:japanese].add_tags %></p>
                    <form action="/tweet" method="post">
                      <input type="hidden" name="tweet" value=" <%= tweet[:japanese] %>">
-                     <button type="submit" name="button" class="btn amber center" style="margin-left: 16px;">tweet as twittamir!</button>
+                     <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">tweet as twittamir!</button>
+                     <p class="right">
+                      <input type="checkbox" id="putin"/>
+                      <label for="putin">Tweet to Vladamir Putin</label>
+                     </p>
                    </form>
                  </div>
 
                </li>
              </ul>
-           <!-- <div class="card-action">
-             <a href="#!" class="waves-effect waves-circle waves-light btn-floating secondary-content amber">
-               <i class="material-icons">translate</i>
-             </a>
 
-           </div> -->
 
        </div>
      </div>
