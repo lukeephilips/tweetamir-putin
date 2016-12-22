@@ -30,7 +30,6 @@ nav a {
 
 #search {
   color: #ffffff;
-
 }
 .page-footer {
   color: white;
@@ -161,4 +160,12 @@ p {
 
 footer.page-footer {
   margin: 0;
+}
+
+.collapsible {
+  margin-top: 0px;
+}
+
+.card-panel {
+  margin-bottom: 0px;
 }
