@@ -24,6 +24,10 @@ nav a {
   color: #2196f3;
 }
 
+.header_footer {
+  color: #FF2400;
+}
+
 .material-icons {
   color: #2196f3;
 }
@@ -63,6 +67,7 @@ nav a {
 .progress {
   display: none;
 }
+
 
 .collapsible-body p {
   padding: 10px;

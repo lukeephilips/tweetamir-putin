@@ -1,0 +1,58 @@
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" media="screen,projection">
+  <link rel="stylesheet" href="/css/main.css" media="screen,projection">
+</head>
+  <body style="background-color:#4b5320;">
+    <nav style="background-color:#E25822;" role="navigation">
+      <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo"><img style="width:35px;" src="../img/imgres.png" alt="hammer and sicle"></i>Twittamir Putin</a>
+
+          <ul class="right hide-on-med-and-down">
+            <li><a href="/">Home</a></li>
+            <li><a href="/">Tweets</a></li>
+            <li><a href="/emoji">Emoji</a></li>
+          </ul>
+
+          <ul id="nav-mobile" class="side-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/">Tweets</a></li>
+            <li><a href="/">Users</a></li>
+          </ul>
+          <a href="/" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        </div>
+      </nav>
+    <div class="container">
+      <%= yield %>
+    </div>
+
+    <footer class="page-footer" style="background-color:#E25822;">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Created By</h5>
+            <p class="grey-text text-lighten-4">Ezra Sandzer-Bell, Chris Clifford, Luke Philips, and Adam Zinder</p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">View the Project</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-4" href="https://github.com/c1iff/twitter-app">Github Repo</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+        © 2016 Copyright
+        <a class="grey-text text-lighten-4 right" href="https://twitter.com/">Twitter</a>
+        </div>
+      </div>
+    </footer>
+<!-- scripts -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+  <script src="/js/main.js"></script>
+  </body>
+</html>

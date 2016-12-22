@@ -1,23 +1,34 @@
-<div class="row">
-  <div class="col s3 z-depth-2 blue-grey lighten-5 sidebar hide-on-small-only">
+<div style="background-color:#4b5320;" class="row">
+  <div class="col s3 z-depth-2 lighten-5 sidebar hide-on-small-only" style="background-color:#c49d03;">
     <% if @user_tweets.any? %>
     <h3>All Tweets</h3>
     <p>by <a href="https://twitter.com/Twittamir_Putin">@Twittamir_Putin</a></p>
     <hr>
   <% @user_tweets.each do |tweet| %>
   <div class="tweets">
-    <p class="truncate"><%= tweet.text.add_tags %> <p>
+    <p><%= tweet.text.add_tags %> <p>
     </div><hr>
     <% end %>
     <% end %>
   </div>
   <div class="col s9">
+    <div class="row">
+      <div class="col s4">
+        <img style="width:200px;" src="../img/soviet_guy.gif" alt="POINT" />
+      </div>
+      <div class="col s4">
+        <img style="width:200px;" src="../img/soviet_guy.gif" alt="POINT" />
+      </div>
+      <div class="col s4">
+        <img style="width:200px;" src="../img/soviet_guy.gif" alt="POINT" />
+      </div>
+    </div>
     <div class="main-body">
       <h3>Search Twitter</h3>
       <div class="row">
 
 
-      <form class="form-control" action="/keyword_search" method="post">
+      <form class="form-control" action="/keyword_search/soviet" method="post">
 
         <div class="col s12">
           <div class="input-field">
@@ -27,15 +38,22 @@
         </div>
       </div>
       <br>
-      <button id="submit" name="submit" class="btn blue" type="submit">Search</button>
+      <button id="submit" name="submit" class="btn red" type="submit">Search</button>
       <br>
     </form>
     <br>
-
-    <div class="putin">
-      <a id="submit" name="submit" class="btn blue" href="/keyword_search/soviet">Putinfy!</a>
-    </div>
-
+    <div class="col s9">
+      <div class="row">
+        <div class="col s4">
+          <img style="width:200px;" src="../img/200w.gif" alt="POINT" />
+        </div>
+        <div class="col s4">
+          <img style="width:200px;" src="../img/200w.gif" alt="POINT" />
+        </div>
+        <div class="col s4">
+          <img style="width:200px;" src="../img/200w.gif" alt="POINT" />
+        </div>
+      </div>
     <!-- <ul class="collapsible" data-collapsible="accordion">
         <li>
           <div class="collapsible-header"><i class="material-icons">filter_drama</i>See Translations</div>
@@ -58,17 +76,13 @@
         <div class="col s12">
           <% if @translated.any? %>
 
-
-
-
-
           <h4>Returned Tweets:</h4>
         <% @translated.each do |tweet| %>
 
             <div class="row">
                  <div class="col s12">
                    <div class="card-panel grey lighten-3">
-                     <p> <b style="font-size: 20px"><%= tweet[:user_name] %></b> <span class="grey-text"> @<a href="https://twitter.com/<%= tweet[:screen_name]%>" class="grey-text"><%= tweet[:screen_name] %></a> • <%= Time.now - tweet[:created_at]%></span></p><hr>
+                     <p> <b style="font-size: 20px"><%= tweet[:user_name] %></b> <span class="grey-text"> @<a href="https://twitter.com/<%= tweet[:screen_name]%>" class="grey-text"><%= tweet[:screen_name] %></a> • <%= Time.now - tweet[:created_at]%><img src="../img/vlad.png" style="width:40px;" alt="vlad" /></span></p><hr>
                      <p><%= tweet[:text].add_tags %></p>
 
                      <ul class="collapsible" data-collapsible="accordion">
