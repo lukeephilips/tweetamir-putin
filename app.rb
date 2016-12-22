@@ -31,12 +31,20 @@ end
 
 post('/tweet') do
   tweet = params['tweet']
+  putin = params['putin']
+  if putin == "on"
+    tweet = '@KremlinRussia_E ' + tweet
+  end
   $twitter_client.update(tweet)
   redirect('/emoji')
 end
 
 post('/tweet_search') do
   tweet = params['tweet']
+  putin = params['putin']
+  if putin == "on"
+    tweet = '@KremlinRussia_E ' + tweet
+  end
   $twitter_client.update(tweet)
   redirect('/keyword_search')
 end
