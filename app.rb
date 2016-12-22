@@ -10,7 +10,7 @@ require('./lib/translate')
 require("pg")
 require('easy_translate')
 require('dotenv')
-# require('pry')
+require('pry')
 require('./lib/emoji')
 require('./lib/keyword')
 require('./lib/sentence')
@@ -88,7 +88,7 @@ get '/emoji_tweet' do
   erb(:test)
 end
 get '/tweet_back' do
-
+binding.pry
   @tweet_back = $twitter_client.update("@#{$twitter_client.mentions.first.user.user_name} #{$twitter_client.mentions.first.text.to_array}").text
   @you_tweeted = true
   erb(:test)
