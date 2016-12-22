@@ -6,22 +6,19 @@
     <hr>
   <% @user_tweets.each do |tweet| %>
   <div class="tweets">
-    <p class="truncate"><%= tweet.text.add_tags %> <p>
+    <p><%= tweet.text.add_tags %> <p>
     </div><hr>
     <% end %>
     <% end %>
   </div>
 
 
-<div class="col s9">
-
-
+<div class="col m9 s12">
   <form  action="/emoji" method="post">
-
       <div class="input-field col s12">
-        <textarea id="sentence" name="sentence" class="materialize-textarea" length="140"></textarea>
+        <textarea id="sentence" name="sentence" class="materialize-textarea" maxlength="140" required></textarea>
         <label for="sentence">Compose a Tweet</label>
-        <button type="submit" class="btn">Emojify</button>
+        <button type="submit" class="btn blue">Emojify</button>
       </div>
 
   </form>
@@ -29,16 +26,9 @@
 
 
 
-<div class="output">
+<div class="content">
   <% if @return %>
-  <p><%= @return %></p>
-
-  <%= tweet = @return %>
-
-
-
-
-
+  <% tweet = @return %>
 
   <div class="row">
        <div class="col s12">

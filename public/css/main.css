@@ -30,7 +30,7 @@ nav a {
 
 #search {
   color: #ffffff;
-  
+
 }
 .page-footer {
   color: white;
@@ -63,6 +63,30 @@ nav a {
  .input-field .prefix.active {
    color: #000;
  }
+
+  /* label focus color */
+  .input-field textarea.materialize-textarea:focus + label {
+    color: #ffc107;
+  }
+  /* label underline focus color */
+  .input-field textarea.materialize-textarea:focus {
+    border-bottom: 1px solid #ffc107;
+    box-shadow: 0 1px 0 0 #ffc107;
+  }
+  /* valid color */
+  .input-field textarea.materialize-textarea.valid {
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+  }
+  /* invalid color */
+  .input-field textarea.materialize-textarea.invalid {
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+  }
+  /* icon prefix focus color */
+  .input-field .prefix.active {
+    color: #000;
+  }
 
 .progress {
   display: none;

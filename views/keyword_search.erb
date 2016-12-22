@@ -6,12 +6,12 @@
     <hr>
   <% @user_tweets.each do |tweet| %>
   <div class="tweets">
-    <p class="truncate"><%= tweet.text.add_tags %> <p>
+    <p><%= tweet.text.add_tags %> <p>
     </div><hr>
     <% end %>
     <% end %>
   </div>
-  <div class="col s9">
+  <div class="col m9 s12">
     <div class="main-body">
       <h3>Search Twitter</h3>
       <div class="row">
