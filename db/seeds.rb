@@ -176,7 +176,7 @@
 {"unicode":"U+1F91E","description":"crossed fingers","keyword":"cross , finger , hand , luck","emoji":"🤞"},
 {"unicode":"U+1F596","description":"vulcan salute","keyword":"finger , hand , spock , vulcan","emoji":"🖖"},
 {"unicode":"U+1F918","description":"sign of the horns","keyword":"finger , hand , horns , rock-on","emoji":"🤘"},
-{"unicode":"U+1F919","description":"call me hand","keyword":"call , hand","emoji":"🤙"},
+{"unicode":"U+1F919","description":"call me hand","keyword":"hand","emoji":"🤙"},
 {"unicode":"U+1F590","description":"raised hand with fingers splayed","keyword":"finger , hand , splayed","emoji":"🖐"},
 {"unicode":"U+1F44C","description":"OK hand, OK, okay","keyword":"hand , fuck , OK","emoji":"👌"},
 {"unicode":"U+1F44D","description":"thumbs up","keyword":"#ERROR!","emoji":"👍"},
