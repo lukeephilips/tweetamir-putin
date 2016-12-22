@@ -31,15 +31,14 @@ end
 
 post('/tweet') do
   tweet = params['tweet']
-  target = params['target']
-  output_tweet = ""
-  if target != ""
-    @output_tweet = "@".concat(target).concat(" ").concat(tweet)
-  else
-    @output_tweet = tweet
-  end
-  $twitter_client.update(@output_tweet)
-  redirect('/user_search')
+  $twitter_client.update(tweet)
+  redirect('/emoji')
+end
+
+post('/tweet_search') do
+  tweet = params['tweet']
+  $twitter_client.update(tweet)
+  redirect('/keyword_search')
 end
 
 get('/keyword_search') do
