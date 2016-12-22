@@ -7,5 +7,3 @@ require('twitter')
 namespace(:db) do
   task(:load_config)
 end
-
-desc "find any tweets to @Twittamir_Putin"

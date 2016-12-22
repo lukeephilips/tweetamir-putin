@@ -57,6 +57,6 @@ class String
         end
       end
     end
-    emojified_sentence.join ("&nbsp&nbsp")
+    emojified_sentence.join (" ")
   end
 end
