@@ -30,8 +30,14 @@ nav a {
 
 #search {
   color: #ffffff;
-
+  font-size: 40px;
 }
+
+#drop-down {
+  color: #ffffff;
+  font-size: 40px;
+}
+
 .page-footer {
   color: white;
 }
@@ -98,20 +104,17 @@ nav a {
 }
 
 /*******sticky footer*********/
-html, body {
-    height: 100%;
+html {
+  height: 100%;
 }
-.wrapper {
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    margin: 0 auto -720px; /* the bottom margin is the negative value of the footer's height */
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
-.footer, .push {
-    height: 720px; /* .push must be the same height as .footer */
+.content {
+  flex: 1;
 }
-
-
 /*******extra style*********/
 nav ul a,
 nav .brand-logo {
@@ -161,4 +164,18 @@ p {
 
 footer.page-footer {
   margin: 0;
+}
+
+.collapsible {
+  margin-top: 0px;
+}
+
+.card-panel {
+  margin-bottom: 0px;
+}
+
+.collapsible-header {
+  font-size: 20px;
+  background-color: #ffc107;
+  color: #fff;
 }

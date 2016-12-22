@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col s3 z-depth-2 blue-grey lighten-5 sidebar hide-on-small-only">
     <% if @user_tweets.any? %>
-    <h3>All Tweets</h3>
+    <h5>All Tweets</h5>
     <p>by <a href="https://twitter.com/Twittamir_Putin">@Twittamir_Putin</a></p>
     <hr>
   <% @user_tweets.each do |tweet| %>
@@ -13,7 +13,7 @@
   </div>
   <div class="col m9 s12">
     <div class="main-body">
-      <h3>Search Twitter</h3>
+      <h5>Search Twitter</h5>
       <div class="row">
 
       <form class="form-control" action="/keyword_search" method="post">
@@ -42,52 +42,46 @@
                    <div class="card-panel grey lighten-3">
                      <p> <b style="font-size: 20px"><%= tweet[:user_name] %></b> <span class="grey-text"> @<a href="https://twitter.com/<%= tweet[:screen_name]%>" class="grey-text"><%= tweet[:screen_name] %></a> • <%= Time.now - tweet[:created_at]%></span></p><hr>
                      <p><%= tweet[:text].add_tags %></p>
-
-                     <ul class="collapsible" data-collapsible="accordion">
+                   </div>
+                     <ul class="collapsible" data-collapsible="accordion" >
                          <li>
-                           <div class="collapsible-header"><i class="material-icons">translate</i>See Translations</div>
+                           <div class="collapsible-header">See Translations<i class="material-icons right" id="drop-down">list</i></div>
                            <div class="collapsible-body">
                              <p><b>Emoji</b></p>
                              <p><%= tweet[:emoji] %></p>
-                             <form action="/tweet" method="post">
+                             <form action="/tweet_search" method="post">
                                <input type="hidden" name="tweet" value=" <%= tweet[:emoji] %>">
-                               <button type="button" name="button" class="btn amber center" style="margin-left: 10px;"><i class="material-icons">repeat</i>retweet</button>
+                               <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">retweet</button>
                              </form>
                            </div>
                            <div class="collapsible-body">
                              <p><b>Russian</b></p>
                              <p><%= tweet[:russian].add_tags %></p>
-                             <form action="/tweet" method="post">
+                             <form action="/tweet_search" method="post">
                                <input type="hidden" name="tweet" value=" <%= tweet[:russian] %>">
-                               <button type="button" name="button" class="btn amber center" style="margin-left: 10px;"><i class="material-icons">repeat</i>retweet</button>
+                               <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">retweet</button>
                              </form>
                            </div>
                            <div class="collapsible-body">
                              <p><b>Spanish</b></p>
                              <p><%= tweet[:spanish].add_tags %></p>
-                             <form action="/tweet" method="post">
+                             <form action="/tweet_search" method="post">
                                <input type="hidden" name="tweet" value=" <%= tweet[:spanish] %>">
-                               <button type="button" name="button" class="btn amber center" style="margin-left: 10px;"><i class="material-icons">repeat</i>retweet</button>
+                               <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">retweet</button>
                              </form>
                            </div>
                            <div class="collapsible-body">
                              <p><b>Japanese</b></p>
                              <p><%= tweet[:japanese].add_tags %></p>
-                             <form action="/tweet" method="post">
+                             <form action="/tweet_search" method="post">
                                <input type="hidden" name="tweet" value=" <%= tweet[:japanese] %>">
-                               <button type="button" name="button" class="btn amber center" style="margin-left: 10px;"><i class="material-icons">repeat</i>retweet</button>
+                               <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">retweet</button>
                              </form>
                            </div>
 
                          </li>
                        </ul>
-                     <!-- <div class="card-action">
-                       <a href="#!" class="waves-effect waves-circle waves-light btn-floating secondary-content amber">
-                         <i class="material-icons">translate</i>
-                       </a>
 
-                     </div> -->
-                   </div>
                  </div>
                </div>
 

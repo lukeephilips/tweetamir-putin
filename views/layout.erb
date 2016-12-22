@@ -8,7 +8,7 @@
 </head>
   <body>
     <nav class="white" role="navigation">
-        <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo"><i class="material-icons">stars</i>Twittamir Putin</a>
+        <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo"><i class="material-icons" id="brand" >stars</i>Twittamir Putin</a>
           <ul class="right hide-on-med-and-down">
             <li><a href="/">Home</a></li>
             <li><a href="/keyword_search">Search</a></li>
@@ -23,12 +23,14 @@
           <a href="/" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         </div>
       </nav>
-    <div class="container">
-      <%= yield %>
-    </div>
-    <div class="wrapper">
 
+    <div class="content">
+      <div class="container">
+        <%= yield %>
+      </div>
+  
     </div>
+
     <footer class="page-footer blue">
       <div class="container">
         <div class="row">

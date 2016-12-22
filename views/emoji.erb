@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col s3 z-depth-2 blue-grey lighten-5 sidebar hide-on-small-only">
     <% if @user_tweets.any? %>
-    <h3>All Tweets</h3>
+    <h4>All Tweets</h4>
     <p>by <a href="https://twitter.com/Twittamir_Putin">@Twittamir_Putin</a></p>
     <hr>
   <% @user_tweets.each do |tweet| %>
@@ -12,13 +12,13 @@
     <% end %>
   </div>
 
-
 <div class="col m9 s12">
+  <h4>Translate Your Text</h4>
   <form  action="/emoji" method="post">
       <div class="input-field col s12">
         <textarea id="sentence" name="sentence" class="materialize-textarea" maxlength="140" required></textarea>
-        <label for="sentence">Compose a Tweet</label>
-        <button type="submit" class="btn blue">Emojify</button>
+        <label for="sentence">Enter text below</label>
+        <button type="submit" class="btn blue">Translate</button>
       </div>
 
   </form>
@@ -35,16 +35,16 @@
          <div class="card-panel grey lighten-3">
            <p> <b style="font-size: 20px"><%= tweet[:user_name] %></b> <span class="grey-text"> @<a href="https://twitter.com/<%= tweet[:screen_name]%>" class="grey-text"><%= tweet[:screen_name] %></a> • <%= Time.now - tweet[:created_at]%></span></p><hr>
            <p><%= tweet[:text].add_tags %></p>
-
+</div>
            <ul class="collapsible" data-collapsible="accordion">
                <li>
-                 <div class="collapsible-header"><i class="material-icons">translate</i>See Translations</div>
+                 <div class="collapsible-header active"><i class="material-icons">translate</i>See Translations</div>
                  <div class="collapsible-body">
                    <p><b>Emoji</b></p>
                    <p><%= tweet[:emoji] %></p>
                    <form action="/tweet" method="post">
                      <input type="hidden" name="tweet" value=" <%= tweet[:emoji] %>">
-                     <button type="button" name="button" class="btn amber center" style="margin-left: 10px;"><i class="material-icons">repeat</i>retweet</button>
+                     <button type="submit" name="button" class="btn amber" style="margin-left: 16px;">tweet as Twittamir!</button>
                    </form>
                  </div>
                  <div class="collapsible-body">
@@ -52,7 +52,7 @@
                    <p><%= tweet[:russian].add_tags %></p>
                    <form action="/tweet" method="post">
                      <input type="hidden" name="tweet" value=" <%= tweet[:russian] %>">
-                     <button type="button" name="button" class="btn amber center" style="margin-left: 10px;"><i class="material-icons">repeat</i>retweet</button>
+                     <button type="submit" name="button" class="btn amber center" style="margin-left: 16px;">retweet</button>
                    </form>
                  </div>
                  <div class="collapsible-body">
@@ -60,7 +60,7 @@
                    <p><%= tweet[:spanish].add_tags %></p>
                    <form action="/tweet" method="post">
                      <input type="hidden" name="tweet" value=" <%= tweet[:spanish] %>">
-                     <button type="button" name="button" class="btn amber center" style="margin-left: 10px;"><i class="material-icons">repeat</i>retweet</button>
+                     <button type="submit" name="button" class="btn amber center" style="margin-left: 16px;">retweet</button>
                    </form>
                  </div>
                  <div class="collapsible-body">
@@ -68,7 +68,7 @@
                    <p><%= tweet[:japanese].add_tags %></p>
                    <form action="/tweet" method="post">
                      <input type="hidden" name="tweet" value=" <%= tweet[:japanese] %>">
-                     <button type="button" name="button" class="btn amber center" style="margin-left: 10px;"><i class="material-icons">repeat</i>retweet</button>
+                     <button type="submit" name="button" class="btn amber center" style="margin-left: 16px;">retweet</button>
                    </form>
                  </div>
 
@@ -80,7 +80,7 @@
              </a>
 
            </div> -->
-         </div>
+
        </div>
      </div>
      <% end %>
