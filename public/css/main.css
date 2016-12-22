@@ -104,20 +104,17 @@ nav a {
 }
 
 /*******sticky footer*********/
-html, body {
-    height: 100%;
+html {
+  height: 100%;
 }
-.wrapper {
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    margin: 0 auto -720px; /* the bottom margin is the negative value of the footer's height */
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
-.footer, .push {
-    height: 720px; /* .push must be the same height as .footer */
+.content {
+  flex: 1;
 }
-
-
 /*******extra style*********/
 nav ul a,
 nav .brand-logo {
