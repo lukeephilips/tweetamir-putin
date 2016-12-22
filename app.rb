@@ -49,6 +49,13 @@ post('/tweet_search') do
   redirect('/keyword_search')
 end
 
+post('/tweet_search_soviet') do
+  tweet = params['tweet']
+  tweet = '@KremlinRussia_E ' + tweet
+  $twitter_client.update(tweet)
+  redirect('/keyword_search/soviet')
+end
+
 get('/keyword_search') do
   @user_tweets = $twitter_client.user_timeline('Twittamir_Putin')
   @tweets = []
