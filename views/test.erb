@@ -1,0 +1,11 @@
+<% if !@you_tweeted %>
+  <div class="output">
+    <% if @emoji_tweet %>
+      <%= @emoji_tweet %>
+    <% end %>
+  </div>
+  <a href="/tweet_back" id="download-button" class="btn-large waves-effect waves-light red lighten-1">Reply with translation</a>
+
+<% else %>
+  <p>You Tweeted <%= @tweet_back %></p>
+<% end %>
