@@ -53,9 +53,9 @@
         <% end %>
       </div>
       <div class="col s6">
-        <% if @translated.any? %>
+        <% if @tweets.any? %>
           <h3>Tweets</h3><hr>
-          <% @translated.each do |tweet| %>
+          <% @tweets.each do |tweet| %>
             <form action="/tweet" method="post">
               <input type="hidden" name="tweet" value="<%= tweet %>">
               <input type="hidden" name="target" value="<%= @target_user %>">

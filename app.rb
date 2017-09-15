@@ -11,6 +11,7 @@ require("pg")
 require('easy_translate')
 require('dotenv')
 require('pry')
+require('byebug')
 require('./lib/emoji')
 require('./lib/keyword')
 require('./lib/sentence')
@@ -18,15 +19,8 @@ require('./lib/add_tags')
 Dotenv.load
 
 get('/') do
-  @user_tweets = $twitter_client.user_timeline('Twittamir_Putin')
-  @tweets = []
-  @translated = []
+  user_tweets
   erb(:index)
-end
-
-
-post('/') do
-
 end
 
 post('/tweet') do
@@ -57,27 +51,26 @@ post('/tweet_search_soviet') do
 end
 
 get('/keyword_search') do
-  @user_tweets = $twitter_client.user_timeline('Twittamir_Putin')
-  @tweets = []
-  @translated = []
+  user_tweets
   erb(:keyword_search)
 end
 
 post('/keyword_search') do
-  @user_tweets = $twitter_client.user_timeline('Twittamir_Putin')
+  user_tweets
   search_term = params['search-term']
-  @translated = []
-  # language = params['language'].to_sym
-
   if !search_term.count("a-zA-Z0-9").zero?
     @tweets = $twitter_client.search(search_term, result_type: "recent").take(5).collect
     @tweets.each() do |tweet|
-
-      tweet_text_with_info = {:user_name => tweet.user.name, :screen_name => tweet.user.screen_name,
-      :created_at => tweet.created_at, :text => tweet.text, :emoji => tweet.text.to_array,
-      :russian => (EasyTranslate.translate(tweet.text, :to => :russian).to_s),
-      :spanish => (EasyTranslate.translate(tweet.text, :to => :spanish)),
-      :japanese => (EasyTranslate.translate(tweet.text, :to => :japanese))}
+      tweet_text_with_info = {
+        :user_name => tweet.user.name,
+        :screen_name => tweet.user.screen_name,
+        :created_at => tweet.created_at,
+        :text => tweet.text,
+        :emoji => tweet.text.to_array
+        # :russian => EasyTranslate.translate(tweet.text, :to => :russian).to_s,
+        # :spanish => EasyTranslate.translate(tweet.text, :to => :spanish),
+        # :japanese => EasyTranslate.translate(tweet.text, :to => :japanese)
+      }
       @translated.push(tweet_text_with_info)
     end
   end
@@ -86,23 +79,27 @@ post('/keyword_search') do
   end
   # $twitter_client.update(user_name)
   # @tweets = $twitter_client.search(user_name, result_type: "recent").take(3).collect
+  byebug
   erb(:keyword_search)
 end
 
 get '/emoji' do
-  @user_tweets = $twitter_client.user_timeline('Twittamir_Putin')
+  user_tweets
   erb(:emoji)
 end
 
 post '/emoji' do
-  @user_tweets = $twitter_client.user_timeline('Twittamir_Putin')
+  user_tweets
   tweet = params['sentence']
 
-  @return = {:user_name => $twitter_client.user.name, :screen_name => $twitter_client.user.screen_name,
-  :created_at => Time.now, :text => tweet, :emoji => tweet.to_array,
-  :russian => (EasyTranslate.translate(tweet, :to => :russian)),
-  :spanish => (EasyTranslate.translate(tweet, :to => :spanish)),
-  :japanese => (EasyTranslate.translate(tweet, :to => :japanese))}
+  @return = {
+    :user_name => $twitter_client.user.name,
+    :screen_name => $twitter_client.user.screen_name,
+    :created_at => Time.now, :text => tweet, :emoji => tweet.to_array,
+    # :russian => EasyTranslate.translate(tweet, :to => :russian),
+    # :spanish => EasyTranslate.translate(tweet, :to => :spanish),
+    # :japanese => EasyTranslate.translate(tweet, :to => :japanese)
+  }
 
   erb(:emoji)
 end
@@ -118,16 +115,14 @@ get '/tweet_back' do
 end
 
 get '/keyword_search/soviet' do
-  @user_tweets = $twitter_client.user_timeline('Twittamir_Putin')
-  @tweets = []
-  @translated = []
-  erb :keyword_search_soviet,:layout => :layout_soviet
+  user_tweets
+  erb :keyword_search_soviet, :layout => :layout_soviet
 end
 
 post'/keyword_search/soviet' do
-  @user_tweets = $twitter_client.user_timeline('Twittamir_Putin')
+  user_tweets
+
   search_term = params['search-term']
-  @translated = []
   # language = params['language'].to_sym
   @tweets = $twitter_client.search(search_term, result_type: "recent").take(5).collect
   @tweets.each() do |tweet|
@@ -139,10 +134,15 @@ post'/keyword_search/soviet' do
     :japanese => (EasyTranslate.translate(tweet.text, :to => :japanese))}
     @translated.push(tweet_text_with_info)
   end
+
   if params['switch']
     @target_user = params['target_user']
   end
-  # $twitter_client.update(user_name)
-  # @tweets = $twitter_client.search(user_name, result_type: "recent").take(3).collect
   erb :keyword_search_soviet,:layout => :layout_soviet
+end
+
+def user_tweets
+  @user_tweets = $twitter_client.user_timeline('TwittamirPutin')
+  @tweets = []
+  @translated = []
 end
