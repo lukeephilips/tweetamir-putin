@@ -61,25 +61,12 @@ post('/keyword_search') do
   if !search_term.count("a-zA-Z0-9").zero?
     @tweets = $twitter_client.search(search_term, result_type: "recent").take(5).collect
     @tweets.each() do |tweet|
-      tweet_text_with_info = {
-        :user_name => tweet.user.name,
-        :screen_name => tweet.user.screen_name,
-        :created_at => tweet.created_at,
-        :text => tweet.text,
-        :emoji => tweet.text.to_array
-        # :russian => EasyTranslate.translate(tweet.text, :to => :russian).to_s,
-        # :spanish => EasyTranslate.translate(tweet.text, :to => :spanish),
-        # :japanese => EasyTranslate.translate(tweet.text, :to => :japanese)
-      }
-      @translated.push(tweet_text_with_info)
+      @translated.push(tweet_text_with_info(tweet))
     end
   end
   if params['switch']
     @target_user = params['target_user']
   end
-  # $twitter_client.update(user_name)
-  # @tweets = $twitter_client.search(user_name, result_type: "recent").take(3).collect
-  byebug
   erb(:keyword_search)
 end
 
@@ -123,16 +110,9 @@ post'/keyword_search/soviet' do
   user_tweets
 
   search_term = params['search-term']
-  # language = params['language'].to_sym
   @tweets = $twitter_client.search(search_term, result_type: "recent").take(5).collect
   @tweets.each() do |tweet|
-
-    tweet_text_with_info = {:user_name => tweet.user.name, :screen_name => tweet.user.screen_name,
-    :created_at => tweet.created_at, :text => tweet.text, :emoji => tweet.text.to_array,
-    :russian => (EasyTranslate.translate(tweet.text, :to => :russian).to_s),
-    :spanish => (EasyTranslate.translate(tweet.text, :to => :spanish)),
-    :japanese => (EasyTranslate.translate(tweet.text, :to => :japanese))}
-    @translated.push(tweet_text_with_info)
+    @translated.push(tweet_text_with_info(tweet))
   end
 
   if params['switch']
@@ -145,4 +125,16 @@ def user_tweets
   @user_tweets = $twitter_client.user_timeline('TwittamirPutin')
   @tweets = []
   @translated = []
+end
+def tweet_text_with_info(tweet)
+  return {
+    :user_name => tweet.user.name,
+    :screen_name => tweet.user.screen_name,
+    :created_at => tweet.created_at,
+    :text => tweet.text,
+    :emoji => tweet.text.to_array,
+  # :russian => (EasyTranslate.translate(tweet.text, :to => :russian).to_s),
+  # :spanish => (EasyTranslate.translate(tweet.text, :to => :spanish)),
+  # :japanese => (EasyTranslate.translate(tweet.text, :to => :japanese))
+}
 end

@@ -2,7 +2,7 @@
   <div class="col s3 z-depth-2 sidebar hide-on-small-only" style="background-color:#4b5320;">
     <% if @user_tweets.any? %>
     <h3>All Tweets</h3>
-    <p>by <a href="https://twitter.com/Twittamir_Putin">@Twittamir_Putin</a></p>
+    <p>by <a href="https://twitter.com/TwittamirPutin">@TwittamirPutin</a></p>
     <hr>
   <% @user_tweets.each do |tweet| %>
   <div class="tweets">
@@ -49,7 +49,6 @@
 
           <h4>Returned Tweets:</h4>
         <% @translated.each do |tweet| %>
-
             <div class="row">
                  <div class="col s12">
                    <div class="card-panel grey lighten-3">
@@ -58,15 +57,18 @@
                    </div>
                      <ul class="collapsible" data-collapsible="accordion">
                          <li>
-                           <div class="collapsible-header">See Translations</div>
-                           <div class="collapsible-body">
-                             <p><b>Emoji</b></p>
-                             <p><%= tweet[:emoji] %></p>
-                             <form action="/tweet_search_soviet" method="post">
-                               <input type="hidden" name="tweet" value=" <%= tweet[:emoji] %>">
-                               <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">retweet</button>
-                             </form>
-                           </div>
+                          <div class="collapsible-header">See Translations</div>
+                            <% if tweet.include?(:emoji) %>
+                             <div class="collapsible-body">
+                               <p><b>Emoji</b></p>
+                               <p><%= tweet[:emoji] %></p>
+                               <form action="/tweet_search_soviet" method="post">
+                                 <input type="hidden" name="tweet" value=" <%= tweet[:emoji] %>">
+                                 <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">retweet</button>
+                               </form>
+                             </div>
+                             <% end %>
+                          <% if tweet.include?(:russian) %>
                            <div class="collapsible-body">
                              <p><b>Russian</b></p>
                              <p><%= tweet[:russian].add_tags %></p>
@@ -75,6 +77,8 @@
                                <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">retweet</button>
                              </form>
                            </div>
+                           <% end %>
+                           <% if tweet.include?(:spanish) %>
                            <div class="collapsible-body">
                              <p><b>Spanish</b></p>
                              <p><%= tweet[:spanish].add_tags %></p>
@@ -83,6 +87,8 @@
                                <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">retweet</button>
                              </form>
                            </div>
+                           <% end %>
+                           <% if tweet.include?(:japanese) %>
                            <div class="collapsible-body">
                              <p><b>Japanese</b></p>
                              <p><%= tweet[:japanese].add_tags %></p>
@@ -91,16 +97,9 @@
                                <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">retweet</button>
                              </form>
                            </div>
-
+                          <% end %>
                          </li>
                        </ul>
-                     <!-- <div class="card-action">
-                       <a href="#!" class="waves-effect waves-circle waves-light btn-floating secondary-content amber">
-                         <i class="material-icons">translate</i>
-                       </a>
-
-                     </div> -->
-
                  </div>
                </div>
 
