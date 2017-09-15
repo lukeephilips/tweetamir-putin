@@ -126,6 +126,7 @@ def user_tweets
   @tweets = []
   @translated = []
 end
+
 def tweet_text_with_info(tweet)
   return {
     :user_name => tweet.user.name,

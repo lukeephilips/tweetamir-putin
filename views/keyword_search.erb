@@ -32,8 +32,6 @@
       <br>
     </form>
     <br>
-
-
       <div class="row">
         <div class="col s12">
           <% if @translated.any? %>
@@ -47,77 +45,23 @@
                        <ul class="collapsible" data-collapsible="accordion" >
                            <li>
                              <div class="collapsible-header">See Translations<i class="material-icons right" id="drop-down">list</i></div>
-                             <% if tweet.include?(:emoji) %>
-                              <div class="collapsible-body">
-                                 <p><b>Emoji</b></p>
-                                 <p><%= tweet[:emoji] %></p>
-                                 <form action="/tweet_search" method="post">
-                                   <input type="hidden" name="tweet" value=" <%= tweet[:emoji] %>">
-                                   <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">retweet</button>
-                                   <p class="right">
-                                    <input type="checkbox" id="putin" name="putin"/>
-                                    <label for="putin">Tweet to Vladamir Putin</label>
-                                  </p>
-                                 </form>
-                               </div>
-                             <% end %>
-                             <% if tweet.include?(:russian) %>
-                               <div class="collapsible-body">
-                                 <p><b>Russian</b></p>
-                                 <p><%= tweet[:russian].add_tags %></p>
-                                 <form action="/tweet_search" method="post">
-                                   <input type="hidden" name="tweet" value=" <%= tweet[:russian] %>">
-                                   <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">retweet</button>
-                                   <p class="right">
-                                    <input type="checkbox" id="putin" name="putin"/>
-                                    <label for="putin">Tweet to Vladamir Putin</label>
-                                  </p>
-                                 </form>
-                               </div>
-                             <% end %>
-                             <% if tweet.include?(:spanish) %>
-                               <div class="collapsible-body">
-                                 <p><b>Spanish</b></p>
-                                 <p><%= tweet[:spanish].add_tags %></p>
-                                 <form action="/tweet_search" method="post">
-                                   <input type="hidden" name="tweet" value=" <%= tweet[:spanish] %>">
-                                   <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">retweet</button>
-                                   <p class="right">
-                                    <input type="checkbox" id="putin" name="putin"/>
-                                    <label for="putin">Tweet to Vladamir Putin</label>
-                                   </p>
-                                 </form>
-                               </div>
-                             <% end %>
-                             <% if tweet.include?(:japanese) %>
-                               <div class="collapsible-body">
-                                 <p><b>Japanese</b></p>
-                                 <p><%= tweet[:japanese].add_tags %></p>
-                                 <form action="/tweet_search" method="post">
-                                   <input type="hidden" name="tweet" value=" <%= tweet[:japanese] %>">
-                                   <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">retweet</button>
-                                   <p class="right">
-                                    <input type="checkbox" id="putin" name="putin"/>
-                                    <label for="putin">Tweet to Vladamir Putin</label>
-                                   </p>
-                                 </form>
-                               </div>
+                             <% [:emoji, :russian, :spanish, :japanese].each do |lang| %>
+                               <% if tweet.include?(lang) %>
+                                <%= erb :tweet_partial, :locals => { :tweet => tweet, :language => :emoji } %>
+                               <% end %>
                              <% end %>
                            </li>
                          </ul>
                    </div>
                  </div>
-               <% end %>
+             <% end %>
           <% else %>
             <br><br>
               <div id="progress" class="progress amber lighten-4">
                   <div class="indeterminate amber"></div>
               </div>
           <% end %>
-
-
         </div>
-
       </div>
     </div>
   </div>
