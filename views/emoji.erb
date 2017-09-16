@@ -1,102 +1,54 @@
 <div class="row">
   <div class="col s3 z-depth-2 blue-grey lighten-5 sidebar hide-on-small-only">
     <% if @user_tweets.any? %>
-    <h4>All Tweets</h4>
-    <p>by <a href="https://twitter.com/Twittamir_Putin">@Twittamir_Putin</a></p>
-    <hr>
-  <% @user_tweets.each do |tweet| %>
-  <div class="tweets">
-    <p><%= tweet.text.add_tags %> <p>
-    </div><hr>
-    <% end %>
+      <h4>All Tweets</h4>
+      <p>by <a href="https://twitter.com/TwittamirPutin">@TwittamirPutin</a></p>
+      <hr>
+      <% @user_tweets.each do |tweet| %>
+        <div class="tweets">
+          <p><%= tweet.text.add_tags %> </p>
+        </div>
+        <hr>
+        <% end %>
     <% end %>
   </div>
 
-<div class="col m9 s12">
-  <h5>Translate Your Text</h5>
-  <form  action="/emoji" method="post">
-      <div class="input-field col s12">
-        <textarea id="sentence" name="sentence" class="materialize-textarea" maxlength="140" required></textarea>
-        <label for="sentence">Enter text below</label>
-        <button type="submit" class="btn blue">Translate</button>
+  <div class="col m9 s12">
+    <h5>Translate Your Text</h5>
+    <form  action="/emoji" method="post">
+        <div class="input-field col s12">
+          <textarea id="sentence" name="sentence" class="materialize-textarea" maxlength="140" required></textarea>
+          <label for="sentence">Enter text below</label>
+          <button type="submit" class="btn blue">Translate</button>
+          <br>
+        </div>
         <br>
-      </div>
-      <br>
-  </form>
-  <br>
+    </form>
+    <br>
 
+  <div class="content">
 
-<div class="content">
+    <% if @return %>
+    <% tweet = @return %>
 
-  <% if @return %>
-  <% tweet = @return %>
-
-  <div class="row">
-       <div class="col s12"><br>
-         <div class="card-panel grey lighten-3">
-           <p> <b style="font-size: 20px"><%= tweet[:user_name] %></b> <span class="grey-text"> @<a href="https://twitter.com/<%= tweet[:screen_name]%>" class="grey-text"><%= tweet[:screen_name] %></a> • <%= Time.now - tweet[:created_at]%></span></p><hr>
-           <p><%= tweet[:text].add_tags %></p>
-</div>
-           <ul class="collapsible" data-collapsible="accordion">
+    <div class="row">
+         <div class="col s12"><br>
+           <div class="card-panel grey lighten-3">
+             <p> <b style="font-size: 20px"><%= tweet[:user_name] %></b> <span class="grey-text"> @<a href="https://twitter.com/<%= tweet[:screen_name]%>" class="grey-text"><%= tweet[:screen_name] %></a> • <%= Time.now - tweet[:created_at]%></span></p><hr>
+             <p><%= tweet[:text].add_tags %></p>
+             <ul class="collapsible" data-collapsible="accordion">
                <li>
                  <div class="collapsible-header active">Translations<i class="material-icons right" id="drop-down">list</i></div>
-                 <div class="collapsible-body">
-                   <p><b>Emoji</b></p>
-                   <p><%= tweet[:emoji] %></p>
-                   <form action="/tweet" method="post">
-                     <input type="hidden" name="tweet" value=" <%= tweet[:emoji] %>">
-                     <button type="submit" name="button" class="btn amber" style="margin-left: 10px;">tweet as twittamir!</button>
-                     <p class="right">
-                      <input type="checkbox" id="putin" name="putin" disabled/>
-                      <label for="putin">Tweet to Vladamir Putin</label>
-                    </p>
-                   </form>
-                 </div>
-                 <div class="collapsible-body">
-                   <p><b>Russian</b></p>
-                   <p><%= tweet[:russian].add_tags %></p>
-                   <form action="/tweet" method="post">
-                     <input type="hidden" name="tweet" value=" <%= tweet[:russian] %>">
-                     <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">tweet as twittamir!</button>
-                     <p class="right">
-                      <input type="checkbox" id="putin"/>
-                      <label for="putin">Tweet to Vladamir Putin</label>
-                     </p>
-                   </form>
-                 </div>
-                 <div class="collapsible-body">
-                   <p><b>Spanish</b></p>
-                   <p><%= tweet[:spanish].add_tags %></p>
-                   <form action="/tweet" method="post">
-                     <input type="hidden" name="tweet" value=" <%= tweet[:spanish] %>">
-                     <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">tweet as twittamir!</button>
-                     <p class="right">
-                      <input type="checkbox" id="putin"/>
-                      <label for="putin">Tweet to Vladamir Putin</label>
-                     </p>
-                   </form>
-                 </div>
-                 <div class="collapsible-body">
-                   <p><b>Japanese</b></p>
-                   <p><%= tweet[:japanese].add_tags %></p>
-                   <form action="/tweet" method="post">
-                     <input type="hidden" name="tweet" value=" <%= tweet[:japanese] %>">
-                     <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">tweet as twittamir!</button>
-                     <p class="right">
-                      <input type="checkbox" id="putin"/>
-                      <label for="putin">Tweet to Vladamir Putin</label>
-                     </p>
-                   </form>
-                 </div>
-
+                 <% [:emoji, :russian, :spanish, :japanese].each do |lang| %>
+                   <% if tweet.include?(lang) %>
+                    <%= erb :"partials/tweet_partial", :locals => { :tweet => tweet, :language => :emoji, :action => "/tweet" } %>
+                   <% end %>
+                 <% end %>
                </li>
              </ul>
-
-
+         </div>
        </div>
-     </div>
-     <% end %>
-
-  </div>
+       <% end %>
+    </div>
   </div>
 </div>

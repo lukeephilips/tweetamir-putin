@@ -1,5 +1,6 @@
-require("sinatra")
-require("sinatra/reloader")
+require 'rubygems'
+require('sinatra')
+require('sinatra/reloader')
 require('sinatra/activerecord')
 also_reload("lib/**/*.rb")
 require('./lib/emoji')
@@ -7,20 +8,42 @@ require('./lib/keyword')
 require('./lib/sentence')
 require('./lib/tweet')
 require('./lib/translate')
-require("pg")
-require('easy_translate')
-require('dotenv')
-require('pry')
-require('byebug')
 require('./lib/emoji')
 require('./lib/keyword')
 require('./lib/sentence')
 require('./lib/add_tags')
+
+
+require('pg')
+require('dotenv')
+require('pry')
+require('byebug')
+
+require('easy_translate')
+require('bing_translator')
+
+# require 'sinatra/run-later'
+
 Dotenv.load
 
 get('/') do
   user_tweets
   erb(:index)
+end
+
+get '/translate' do
+
+  text = params['text']
+  puts '********'
+  run_later do
+    translator = BingTranslator.new('COGNITIVE_SUBSCRIPTION_KEY')
+    @spanish = translator.translate('Hello. This will be translated!', :from => 'en', :to => 'es')
+    puts '********'
+    puts @spanish
+    # Server code will go here...
+  end
+  puts @spanish
+  byebug
 end
 
 post('/tweet') do
@@ -77,13 +100,12 @@ end
 
 post '/emoji' do
   user_tweets
-  tweet = params['sentence']
-
+  tweet = Sentence.new params['sentence']
   @return = {
     :user_name => $twitter_client.user.name,
     :screen_name => $twitter_client.user.screen_name,
-    :created_at => Time.now, :text => tweet, :emoji => tweet.to_array,
-    # :russian => EasyTranslate.translate(tweet, :to => :russian),
+    :created_at => Time.now, :text => tweet.sentence, :emoji => tweet.to_emojis,
+    # :russian => .translate(tweet, :to => :russian),
     # :spanish => EasyTranslate.translate(tweet, :to => :spanish),
     # :japanese => EasyTranslate.translate(tweet, :to => :japanese)
   }
@@ -92,11 +114,14 @@ post '/emoji' do
 end
 
 get '/emoji_tweet' do
-    @emoji_tweet = "@#{$twitter_client.mentions.first.user.user_name}"+" says "+" #{$twitter_client.mentions.first.text.to_array}"
+    tweet_text = Sentence.new($twitter_client.mentions.first.text)
+    @emoji_tweet = "@#{$twitter_client.mentions.first.user.user_name}"+" says "+" #{tweet_text.to_emojis}"
   erb(:test)
 end
 get '/tweet_back' do
-  @tweet_back = $twitter_client.update("@#{$twitter_client.mentions.first.user.user_name} #{$twitter_client.mentions.first.text.to_array}").text
+  tweet_text = Sentence.new($twitter_client.mentions.first.text)
+
+  @tweet_back = $twitter_client.update("@#{$twitter_client.mentions.first.user.user_name} #{tweet_text.to_emojis}").text
   @you_tweeted = true
   erb(:test)
 end
@@ -128,12 +153,13 @@ def user_tweets
 end
 
 def tweet_text_with_info(tweet)
+  byebug
   return {
     :user_name => tweet.user.name,
     :screen_name => tweet.user.screen_name,
     :created_at => tweet.created_at,
     :text => tweet.text,
-    :emoji => tweet.text.to_array,
+    :emoji => tweet.text.to_emojis,
   # :russian => (EasyTranslate.translate(tweet.text, :to => :russian).to_s),
   # :spanish => (EasyTranslate.translate(tweet.text, :to => :spanish)),
   # :japanese => (EasyTranslate.translate(tweet.text, :to => :japanese))

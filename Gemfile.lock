@@ -16,6 +16,7 @@ GEM
       public_suffix (~> 2.0, >= 2.0.2)
     arel (7.1.4)
     backports (3.6.8)
+    bing_translator (0.0.2)
     buftok (0.2.0)
     byebug (9.0.6)
     capybara (2.11.0)
@@ -130,6 +131,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bing_translator
   byebug
   capybara
   dotenv

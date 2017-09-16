@@ -1,9 +1,9 @@
 <div class="collapsible-body">
    <p><b><%= language.to_s.capitalize %></b></p>
    <p><%= tweet[language.to_sym] %></p>
-   <form action="/tweet_search" method="post">
+   <form action="<%= action %>" method="post">
      <input type="hidden" name="tweet" value=" <%= tweet[language.to_sym] %>">
-     <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">retweet</button>
+     <button type="submit" name="button" class="btn amber center" style="margin-left: 10px;">tweet</button>
      <p class="right">
       <input type="checkbox" id="putin" name="putin" disabled/>
       <label for="putin">Tweet to Vladamir Putin</label>
