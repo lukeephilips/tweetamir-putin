@@ -1,5 +1,5 @@
 class Translator
-  require('easy_translate')
+  # require('easy_translate')
   require 'httparty'
   require('dotenv')
   Dotenv.load
