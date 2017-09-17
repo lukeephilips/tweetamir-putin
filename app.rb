@@ -18,12 +18,8 @@ require('pg')
 require('dotenv')
 require('pry')
 require('byebug')
-
-# require('easy_translate')
-# require('bing_translator')
 require 'httparty'
-
-# require 'sinatra/run-later'
+# require('easy_translate')
 
 Dotenv.load
 
@@ -87,6 +83,11 @@ end
 post '/emoji' do
   user_tweets
   tweet = Sentence.new params['sentence']
+  es = Translator.new(tweet.sentence, 'es')
+  ja = Translator.new(tweet.sentence, 'ja')
+  ru = Translator.new(tweet.sentence, 'ru')
+
+
 
   @return = {
     :user_name => $twitter_client.user.name,
@@ -94,9 +95,9 @@ post '/emoji' do
     :created_at => Time.now,
     :text => tweet.sentence,
     :emoji => tweet.to_emojis,
-    # :russian => translate(tweet.sentence, 'ru'),
-    :spanish => translate(tweet.sentence, 'es'),
-    :japanese => translate(tweet.sentence, 'ja')
+    # :russian => ru.translate,
+    :spanish => es.translate,
+    :japanese => ja.translate
   }
 
   erb(:emoji)
@@ -143,34 +144,19 @@ end
 
 def tweet_text_with_info(tweet)
   tweet_text = Sentence.new(tweet.text)
+  es = Translator.new(tweet.text, 'es')
+  ja = Translator.new(tweet.text, 'ja')
+  ru = Translator.new(tweet.text, 'ru')
+
   return {
     :user_name => tweet.user.name,
     :screen_name => tweet.user.screen_name,
     :created_at => tweet.created_at,
     :text => tweet.text,
     :emoji => tweet_text.to_emojis,
-    # :russian => translate(tweet.text, 'ru'),
-    :spanish => translate(tweet.text, 'es'),
-    :japanese => translate(tweet.text, 'ja')
+    # :russian => ru.translate,
+    :spanish => es.translate,
+    :japanese => ja.translate
 
-}
-end
-def translate(text, target)
-  # encoding_options = {
-  #   :invalid           => :replace,  # Replace invalid byte sequences
-  #   :undef             => :replace,  # Replace anything not defined in ASCII
-  #   :replace           => '',        # Use a blank for those replacements
-  #   :universal_newline => true       # Always break lines with \n
-  # }
-
-  auth = {username: ENV['WATSON_USERNAME'], password: ENV['WATSON_PASSWORD']}
-  source = "en"
-  text = text.gsub(/[^0-9a-z^\s]/i, '')
-  # text = text.encode(Encoding.find('ASCII'), encoding_options)
-
-  resp = HTTParty.post(
-    "https://gateway.watsonplatform.net/language-translator/api/v2/translate?text='#{text}'&source=#{source}&target=#{target}",
-    :basic_auth => auth
-  )
-  resp.parsed_response
+  }
 end

@@ -14,5 +14,4 @@ gem('dotenv')
 
 gem('twitter')
 # gem('easy_translate')
-# gem('bing_translator')
 gem 'httparty'
