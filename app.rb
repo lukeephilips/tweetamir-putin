@@ -83,9 +83,7 @@ end
 post '/emoji' do
   user_tweets
   tweet = Sentence.new params['sentence']
-  es = Translator.new(tweet.sentence, 'es')
-  ja = Translator.new(tweet.sentence, 'ja')
-  ru = Translator.new(tweet.sentence, 'ru')
+  sent = Translator.new(tweet.sentence)
 
 
 
@@ -95,9 +93,9 @@ post '/emoji' do
     :created_at => Time.now,
     :text => tweet.sentence,
     :emoji => tweet.to_emojis,
-    # :russian => ru.translate,
-    :spanish => es.translate,
-    :japanese => ja.translate
+    # :russian => sent.russian,
+    :spanish => sent.spanish,
+    :japanese => sent.japanese
   }
 
   erb(:emoji)
@@ -144,9 +142,7 @@ end
 
 def tweet_text_with_info(tweet)
   tweet_text = Sentence.new(tweet.text)
-  es = Translator.new(tweet.text, 'es')
-  ja = Translator.new(tweet.text, 'ja')
-  ru = Translator.new(tweet.text, 'ru')
+  sent = Translator.new(tweet.text)
 
   return {
     :user_name => tweet.user.name,
@@ -154,9 +150,9 @@ def tweet_text_with_info(tweet)
     :created_at => tweet.created_at,
     :text => tweet.text,
     :emoji => tweet_text.to_emojis,
-    # :russian => ru.translate,
-    :spanish => es.translate,
-    :japanese => ja.translate
+    # :russian => sent.russian,
+    :spanish => sent.spanish,
+    :japanese => sent.japanese
 
   }
 end

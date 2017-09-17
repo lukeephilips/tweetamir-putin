@@ -16,7 +16,6 @@ GEM
       public_suffix (~> 2.0, >= 2.0.2)
     arel (7.1.4)
     backports (3.6.8)
-    bing_translator (0.0.2)
     buftok (0.2.0)
     byebug (9.0.6)
     capybara (2.11.0)
@@ -32,10 +31,6 @@ GEM
     domain_name (0.5.20161129)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.0.1)
-    easy_translate (0.5.0)
-      json
-      thread
-      thread_safe
     equalizer (0.0.11)
     faraday (0.10.0)
       multipart-post (>= 1.2, < 3)
@@ -48,8 +43,9 @@ GEM
       domain_name (~> 0.5)
     http-form_data (1.0.1)
     http_parser.rb (0.6.0)
+    httparty (0.14.0)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
-    json (2.0.2)
     launchy (2.4.3)
       addressable (~> 2.3)
     memoizable (0.4.2)
@@ -61,6 +57,7 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.10.1)
     multi_json (1.12.1)
+    multi_xml (0.6.0)
     multipart-post (2.0.0)
     naught (1.1.0)
     nokogiri (1.6.8.1)
@@ -106,7 +103,6 @@ GEM
       sinatra (~> 1.4.0)
       tilt (>= 1.3, < 3)
     slop (3.6.0)
-    thread (0.2.2)
     thread_safe (0.3.5)
     tilt (2.0.5)
     twitter (6.0.0)
@@ -131,11 +127,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bing_translator
   byebug
   capybara
   dotenv
-  easy_translate
+  httparty
   launchy
   pg
   pry
@@ -147,4 +142,4 @@ DEPENDENCIES
   twitter
 
 BUNDLED WITH
-   1.13.6
+   1.14.6
