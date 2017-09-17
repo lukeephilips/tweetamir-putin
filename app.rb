@@ -19,8 +19,9 @@ require('dotenv')
 require('pry')
 require('byebug')
 
-require('easy_translate')
-require('bing_translator')
+# require('easy_translate')
+# require('bing_translator')
+require 'httparty'
 
 # require 'sinatra/run-later'
 
@@ -29,21 +30,6 @@ Dotenv.load
 get('/') do
   user_tweets
   erb(:index)
-end
-
-get '/translate' do
-
-  text = params['text']
-  puts '********'
-  run_later do
-    translator = BingTranslator.new('COGNITIVE_SUBSCRIPTION_KEY')
-    @spanish = translator.translate('Hello. This will be translated!', :from => 'en', :to => 'es')
-    puts '********'
-    puts @spanish
-    # Server code will go here...
-  end
-  puts @spanish
-  byebug
 end
 
 post('/tweet') do
@@ -101,13 +87,16 @@ end
 post '/emoji' do
   user_tweets
   tweet = Sentence.new params['sentence']
+
   @return = {
     :user_name => $twitter_client.user.name,
     :screen_name => $twitter_client.user.screen_name,
-    :created_at => Time.now, :text => tweet.sentence, :emoji => tweet.to_emojis,
-    # :russian => .translate(tweet, :to => :russian),
-    # :spanish => EasyTranslate.translate(tweet, :to => :spanish),
-    # :japanese => EasyTranslate.translate(tweet, :to => :japanese)
+    :created_at => Time.now,
+    :text => tweet.sentence,
+    :emoji => tweet.to_emojis,
+    # :russian => translate(tweet.sentence, 'ru'),
+    :spanish => translate(tweet.sentence, 'es'),
+    :japanese => translate(tweet.sentence, 'ja')
   }
 
   erb(:emoji)
@@ -153,15 +142,35 @@ def user_tweets
 end
 
 def tweet_text_with_info(tweet)
-  byebug
+  tweet_text = Sentence.new(tweet.text)
   return {
     :user_name => tweet.user.name,
     :screen_name => tweet.user.screen_name,
     :created_at => tweet.created_at,
     :text => tweet.text,
-    :emoji => tweet.text.to_emojis,
-  # :russian => (EasyTranslate.translate(tweet.text, :to => :russian).to_s),
-  # :spanish => (EasyTranslate.translate(tweet.text, :to => :spanish)),
-  # :japanese => (EasyTranslate.translate(tweet.text, :to => :japanese))
+    :emoji => tweet_text.to_emojis,
+    # :russian => translate(tweet.text, 'ru'),
+    :spanish => translate(tweet.text, 'es'),
+    :japanese => translate(tweet.text, 'ja')
+
 }
+end
+def translate(text, target)
+  # encoding_options = {
+  #   :invalid           => :replace,  # Replace invalid byte sequences
+  #   :undef             => :replace,  # Replace anything not defined in ASCII
+  #   :replace           => '',        # Use a blank for those replacements
+  #   :universal_newline => true       # Always break lines with \n
+  # }
+
+  auth = {username: ENV['WATSON_USERNAME'], password: ENV['WATSON_PASSWORD']}
+  source = "en"
+  text = text.gsub(/[^0-9a-z^\s]/i, '')
+  # text = text.encode(Encoding.find('ASCII'), encoding_options)
+
+  resp = HTTParty.post(
+    "https://gateway.watsonplatform.net/language-translator/api/v2/translate?text='#{text}'&source=#{source}&target=#{target}",
+    :basic_auth => auth
+  )
+  resp.parsed_response
 end

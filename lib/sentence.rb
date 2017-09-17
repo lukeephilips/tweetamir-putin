@@ -10,22 +10,23 @@ class Sentence
   end
 
   def to_emojis
-    remove_list = ['a', 'the', 'an', 'of', 'and', 'if', 'or', 'in', 'where', 'were', 'is', 'it', 'to', 'am','@Twittamir_Putin']
+
+    remove_list = ['a', 'an', 'and','the', 'of', 'if', 'or', 'in', 'where', 'were', 'is', 'it', 'to', 'am','@Twittamir_Putin']
 
     sentence_array = @sentence.split(" ") - remove_list
 
     sentence_array.each do |word|
       if ignore_word?(word)
         @emojified_sentence.push(word)
-      end
-
-      found_keyword = Keyword.includes(:emoji).find_by(keyword: word)
-      if found_keyword
-        @emojified_sentence.push(found_keyword.emoji.image)
       else
-        all_substrings
-        replace_substrings
-        sort_and_replace(word)
+        found_keyword = Keyword.includes(:emoji).find_by(keyword: word)
+        if found_keyword
+          @emojified_sentence.push(found_keyword.emoji.image)
+        else
+          all_substrings(word)
+          replace_substrings
+          sort_and_replace(word)
+        end
       end
     end
     @emojified_sentence.join (" ")
@@ -34,15 +35,16 @@ class Sentence
   private
   def ignore_word?(word)
     ignore_list = ['@', '#', 'http']
-    ignore_list.any? { |item| @sentence.include?(item) }
+    ignore_list.any? { |item| word.include?(item) }
   end
-  def all_substrings
+
+  def all_substrings(word)
     # runs a double loop to push every substring from 0 to word length
     @substrings.clear
-    len = @sentence.length
+    len = word.length
     (0...len).each do |i|
       (i+2...len).each do |j|
-        @substrings.push(@sentence[i..j])
+        @substrings.push(word[i..j])
       end
     end
   end

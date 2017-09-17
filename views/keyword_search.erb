@@ -47,7 +47,7 @@
                              <div class="collapsible-header">See Translations<i class="material-icons right" id="drop-down">list</i></div>
                              <% [:emoji, :russian, :spanish, :japanese].each do |lang| %>
                                <% if tweet.include?(lang) %>
-                                <%= erb :"partials/tweet_partial", :locals => { :tweet => tweet, :language => :emoji, :action => "/tweet_search" } %>
+                                <%= erb :"partials/tweet_partial", :locals => { :tweet => tweet, :language => lang, :action => "/tweet_search" } %>
                                <% end %>
                              <% end %>
                            </li>
