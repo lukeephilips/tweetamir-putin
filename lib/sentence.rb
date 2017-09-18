@@ -11,7 +11,7 @@ class Sentence
 
   def to_emojis
 
-    remove_list = ['a', 'an', 'and','the', 'of', 'if', 'or', 'in', 'where', 'were', 'is', 'it', 'to', 'am','@Twittamir_Putin']
+    remove_list = ['a', 'an', 'and','the', 'of', 'if', 'or', 'in', 'where', 'were', 'is', 'it', 'to', 'am','@TwittamirPutin']
 
     sentence_array = @sentence.split(" ") - remove_list
 
