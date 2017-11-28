@@ -85,17 +85,15 @@ post '/emoji' do
   tweet = Sentence.new params['sentence']
   sent = Translator.new(tweet.sentence)
 
-
-
   @return = {
     :user_name => $twitter_client.user.name,
     :screen_name => $twitter_client.user.screen_name,
     :created_at => Time.now,
     :text => tweet.sentence,
     :emoji => tweet.to_emojis,
-    # :russian => sent.russian,
-    :spanish => sent.spanish,
-    :japanese => sent.japanese
+    :russian => sent.translate_or_error("russian"),
+    :spanish => sent.translate_or_error("spanish"),
+    :japanese => sent.translate_or_error("japanese")
   }
 
   erb(:emoji)
@@ -150,9 +148,19 @@ def tweet_text_with_info(tweet)
     :created_at => tweet.created_at,
     :text => tweet.text,
     :emoji => tweet_text.to_emojis,
-    # :russian => sent.russian,
-    :spanish => sent.spanish,
-    :japanese => sent.japanese
+    :russian => sent.translate_or_error("russian"),
+    :spanish => sent.translate_or_error("spanish"),
+    :japanese => sent.translate_or_error("japanese"),
 
   }
+end
+
+public
+
+def translate_or_error(lang)
+  if self.send(lang)["code"] === 401
+    lang.capitalize.concat " translation unavailable without paid subscription"
+  else
+    self.send(lang)
+  end
 end
